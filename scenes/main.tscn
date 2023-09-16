@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=7 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="Script" path="res://events/EventBus.gd" id="1_ssqi4"]
 [ext_resource type="TileSet" uid="uid://ebhjv1afqvxo" path="res://map/tile_set.tres" id="2_18a4n"]
+[ext_resource type="Script" path="res://ui/Cursor.gd" id="3_6ru26"]
+[ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="3_g2iw8"]
+[ext_resource type="Script" path="res://map/Map.gd" id="3_y7hv7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt3pf"]
+atlas = ExtResource("3_g2iw8")
+region = Rect2(32, 0, 16, 16)
 
 [node name="Scene" type="Node2D"]
 
@@ -19,6 +26,7 @@ limit_smoothed = true
 editor_draw_limits = true
 
 [node name="TileMap" type="TileMap" parent="."]
+unique_name_in_owner = true
 scale = Vector2(4, 4)
 tile_set = ExtResource("2_18a4n")
 format = 2
@@ -31,4 +39,13 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(262150, 0, 2, 262148, 0, 2, 262147, 0, 2, 262149, 65536, 2, 196613, 65536, 1, 131077, 65536, 1, 327685, 65536, 1, 393221, 65536, 1, 262151, 0, 2, 196612, 0, 1, 196611, 0, 1, 131076, 0, 1, 131075, 0, 1, 262152, 131072, 2, 458757, 65536, 2, 327686, 131072, 1, 327687, 131072, 1, 393223, 131072, 1, 196614, 131072, 0)
+layer_1/tile_data = PackedInt32Array(262150, 0, 2, 262148, 0, 2, 262147, 0, 2, 262149, 65536, 2, 196613, 65536, 1, 131077, 65536, 1, 327685, 65536, 1, 393221, 65536, 1, 262151, 0, 2, 196612, 0, 1, 196611, 0, 1, 131076, 0, 1, 131075, 0, 1, 262152, 131072, 2, 458757, 65536, 2, 327686, 131072, 1, 327687, 131072, 1, 393223, 131072, 1)
+script = ExtResource("3_y7hv7")
+
+[node name="Cursor" type="Node2D" parent="."]
+script = ExtResource("3_6ru26")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_yt3pf")
+centered = false
