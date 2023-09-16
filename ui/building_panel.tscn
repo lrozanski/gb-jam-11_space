@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8033wiuyjm2d"]
+
+[ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_lce7f"]
+[ext_resource type="Script" path="res://ui/BuildingPanel.gd" id="2_5uesh"]
+[ext_resource type="Texture2D" uid="uid://bvj5c4gcyaqcq" path="res://ui/icons/pipe.tres" id="3_fpatu"]
+[ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="4_mcu0h"]
+[ext_resource type="Texture2D" uid="uid://cty2ke0cb73qh" path="res://ui/icons/farm_field.tres" id="5_udqcv"]
+[ext_resource type="Texture2D" uid="uid://3kdmawlblux7" path="res://ui/icons/air_purifier.tres" id="6_nfk0r"]
+[ext_resource type="Texture2D" uid="uid://dnke77a61w6fv" path="res://ui/icons/landing_pad.tres" id="7_mrfmw"]
+
+[node name="BuildingPanel" type="PanelContainer"]
+offset_right = 336.0
+offset_bottom = 91.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_lce7f")
+script = ExtResource("2_5uesh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Buildings" type="HBoxContainer" parent="MarginContainer/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Pipe" type="Button" parent="MarginContainer/Rows/Buildings"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+button_mask = 0
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Rows/Buildings/Pipe"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("1_lce7f")
+texture = ExtResource("3_fpatu")
+
+[node name="Habitat" type="Button" parent="MarginContainer/Rows/Buildings"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+button_mask = 0
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Rows/Buildings/Habitat"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("1_lce7f")
+texture = ExtResource("4_mcu0h")
+
+[node name="Farm Field" type="Button" parent="MarginContainer/Rows/Buildings"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+button_mask = 0
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Rows/Buildings/Farm Field"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("1_lce7f")
+texture = ExtResource("5_udqcv")
+
+[node name="Air Purifier" type="Button" parent="MarginContainer/Rows/Buildings"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+button_mask = 0
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Rows/Buildings/Air Purifier"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("1_lce7f")
+texture = ExtResource("6_nfk0r")
+
+[node name="Landing Pad" type="Button" parent="MarginContainer/Rows/Buildings"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+button_mask = 0
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Rows/Buildings/Landing Pad"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("1_lce7f")
+texture = ExtResource("7_mrfmw")
+
+[node name="BuildingLabel" type="Label" parent="MarginContainer/Rows"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme = ExtResource("1_lce7f")
+text = "Habitat"
+horizontal_alignment = 1
+vertical_alignment = 1

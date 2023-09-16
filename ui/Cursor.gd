@@ -1,11 +1,19 @@
 extends Node2D
+class_name Cursor
 
 @onready var map: Map = $"%TileMap"
 
 signal construct_building
 signal demolish_building
 
+func _ready():
+	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	pass
+
 func _process(delta):
+	if !UI_Manager.CURSOR_MOVEABLE || UI_Manager.BUILDING_PANEL_OPEN:
+		return
+	
 	# Movement
 	var bounds: Rect2 = get_viewport_rect()
 	var direction: Vector2 = Vector2.ZERO

@@ -1,29 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=7 format=3 uid="uid://shqk8wkaq2x"]
 
-[ext_resource type="Script" path="res://events/EventBus.gd" id="1_ssqi4"]
+[ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
 [ext_resource type="TileSet" uid="uid://ebhjv1afqvxo" path="res://map/tile_set.tres" id="2_18a4n"]
-[ext_resource type="Script" path="res://ui/Cursor.gd" id="3_6ru26"]
-[ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="3_g2iw8"]
 [ext_resource type="Script" path="res://map/Map.gd" id="3_y7hv7"]
-[ext_resource type="Texture2D" uid="uid://bvj5c4gcyaqcq" path="res://ui/icons/pipe.tres" id="6_707r2"]
-[ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="6_lvuba"]
-[ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="6_vwqou"]
-[ext_resource type="Texture2D" uid="uid://cty2ke0cb73qh" path="res://ui/icons/farm_field.tres" id="7_emin1"]
-[ext_resource type="Texture2D" uid="uid://3kdmawlblux7" path="res://ui/icons/air_purifier.tres" id="8_te483"]
-[ext_resource type="Texture2D" uid="uid://dnke77a61w6fv" path="res://ui/icons/landing_pad.tres" id="10_mke6i"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yt3pf"]
-atlas = ExtResource("3_g2iw8")
-region = Rect2(32, 0, 16, 16)
+[ext_resource type="PackedScene" uid="uid://y6yrdj5lulua" path="res://ui/cursor.tscn" id="4_owu4c"]
+[ext_resource type="PackedScene" uid="uid://c8033wiuyjm2d" path="res://ui/building_panel.tscn" id="5_oaidf"]
+[ext_resource type="Script" path="res://scenes/UI_Manager.gd" id="6_owbgk"]
 
 [node name="Scene" type="Node2D"]
 
-[node name="EventBus" type="Node" parent="."]
-script = ExtResource("1_ssqi4")
-
-[node name="GameLogicTick" type="Timer" parent="EventBus"]
-wait_time = 5.0
-autostart = true
+[node name="EventBus" parent="." instance=ExtResource("1_mr1qb")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
@@ -48,101 +34,12 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(262150, 0, 2, 262148, 0, 2, 262147, 0, 2, 262149, 65536, 2, 196613, 65536, 1, 131077, 65536, 1, 327685, 65536, 1, 393221, 65536, 1, 262151, 0, 2, 196612, 0, 1, 196611, 0, 1, 131076, 0, 1, 131075, 0, 1, 262152, 131072, 2, 458757, 65536, 2, 327686, 131072, 1, 327687, 131072, 1, 393223, 131072, 1)
 script = ExtResource("3_y7hv7")
 
-[node name="Cursor" type="Node2D" parent="."]
-script = ExtResource("3_6ru26")
+[node name="Cursor" parent="." instance=ExtResource("4_owu4c")]
+unique_name_in_owner = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
-scale = Vector2(4, 4)
-texture = SubResource("AtlasTexture_yt3pf")
-centered = false
+[node name="BuildingPanel" parent="." instance=ExtResource("5_oaidf")]
+unique_name_in_owner = true
+visible = false
 
-[node name="BuildingPanel" type="PanelContainer" parent="."]
-offset_right = 336.0
-offset_bottom = 91.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("6_lvuba")
-
-[node name="MarginContainer" type="MarginContainer" parent="BuildingPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-
-[node name="Rows" type="VBoxContainer" parent="BuildingPanel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="Buildings" type="HBoxContainer" parent="BuildingPanel/MarginContainer/Rows"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Pipe" type="Button" parent="BuildingPanel/MarginContainer/Rows/Buildings"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-mouse_filter = 2
-button_mask = 0
-
-[node name="Icon" type="TextureRect" parent="BuildingPanel/MarginContainer/Rows/Buildings/Pipe"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 64.0
-theme = ExtResource("6_lvuba")
-texture = ExtResource("6_707r2")
-
-[node name="Habitat" type="Button" parent="BuildingPanel/MarginContainer/Rows/Buildings"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="BuildingPanel/MarginContainer/Rows/Buildings/Habitat"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 64.0
-theme = ExtResource("6_lvuba")
-texture = ExtResource("6_vwqou")
-
-[node name="FarmField" type="Button" parent="BuildingPanel/MarginContainer/Rows/Buildings"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="BuildingPanel/MarginContainer/Rows/Buildings/FarmField"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 64.0
-theme = ExtResource("6_lvuba")
-texture = ExtResource("7_emin1")
-
-[node name="AirPurifier" type="Button" parent="BuildingPanel/MarginContainer/Rows/Buildings"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="BuildingPanel/MarginContainer/Rows/Buildings/AirPurifier"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 64.0
-theme = ExtResource("6_lvuba")
-texture = ExtResource("8_te483")
-
-[node name="LandingPad" type="Button" parent="BuildingPanel/MarginContainer/Rows/Buildings"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="BuildingPanel/MarginContainer/Rows/Buildings/LandingPad"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-offset_right = 64.0
-offset_bottom = 64.0
-theme = ExtResource("6_lvuba")
-texture = ExtResource("10_mke6i")
-
-[node name="BuildingLabel" type="Label" parent="BuildingPanel/MarginContainer/Rows"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-theme = ExtResource("6_lvuba")
-text = "Habitat"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="UI_Manager" type="Node" parent="."]
+script = ExtResource("6_owbgk")
