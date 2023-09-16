@@ -11,6 +11,7 @@ region = Rect2(32, 0, 16, 16)
 script = ExtResource("1_tak03")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_yt3pf")
 centered = false

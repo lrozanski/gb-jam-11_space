@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgt6wn31sunjk"]
+
+[ext_resource type="Texture2D" uid="uid://bvj5c4gcyaqcq" path="res://ui/icons/pipe.tres" id="1_04t1v"]
+
+[node name="Pipe" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_04t1v")
+centered = false

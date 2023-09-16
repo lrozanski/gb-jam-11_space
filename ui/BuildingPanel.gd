@@ -18,7 +18,8 @@ var paused = false
 func _ready():
 	cursor.connect("construct_building", show_panel, CONNECT_DEFERRED)
 	building_buttons = get_node("MarginContainer/Rows/Buildings").get_children()
-	max_index = building_buttons.size() - 1
+	max_index = building_buttons.size()
+	_update_building_name(building_buttons[building_index].name as String)
 
 
 func show_panel():
@@ -30,6 +31,11 @@ func hide_panel():
 	visible = false
 	paused = true
 
+
+func _update_building_name(name: String):
+	BUILDING_NAME = name
+	building_label.text = name
+	
 
 func _process(_delta):
 	if !visible:
@@ -45,8 +51,7 @@ func _process(_delta):
 	if building_index != current_building_index:
 		building_index = wrapi(building_index, 0, max_index)
 		(building_buttons[building_index] as Button).grab_focus()
-		BUILDING_NAME = building_buttons[building_index].name as String
-		building_label.text = BUILDING_NAME
+		_update_building_name(building_buttons[building_index].name as String)
 
 	if Input.is_action_just_pressed("Confirm"):
 		construction_confirmed.emit()
