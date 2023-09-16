@@ -28,10 +28,6 @@ func deregister_action_per_tick(action: Callable):
 		registered_actions.remove_at(action_index)
 
 
-func send_message(action: Callable):
-	registered_oneshot_actions.append(action)
-
-
 func logic_tick():
 	# Oneshot actions
 	for oneshot_action in registered_oneshot_actions:
