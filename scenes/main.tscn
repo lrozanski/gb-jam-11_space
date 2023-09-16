@@ -1,5 +1,18 @@
-[gd_scene format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=2 format=3 uid="uid://shqk8wkaq2x"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" path="res://events/EventBus.gd" id="1_ssqi4"]
+
+[node name="Scene" type="Node2D"]
+
+[node name="EventBus" type="Node" parent="."]
+script = ExtResource("1_ssqi4")
+
+[node name="GameLogicTick" type="Timer" parent="EventBus"]
+wait_time = 5.0
+autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_smoothed = true
+editor_draw_limits = true
