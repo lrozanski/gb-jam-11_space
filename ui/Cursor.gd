@@ -29,5 +29,7 @@ func _process(delta):
 		
 		if is_building:
 			demolish_building.emit()
+			print("demolish_building")
 		else:
 			construct_building.emit()
+			print("construct_building")
