@@ -2,7 +2,7 @@ extends Node
 class_name ResourceManager
 
 static var POPULATION = 1
-static var MAX_POPULATION = 1
+static var MAX_POPULATION = 0
 static var FOOD = 0
 static var OXYGEN = 0
 
@@ -16,7 +16,7 @@ static var POPULATION_PER_SECOND = 0.2
 @onready var event_bus: EventBus = $"%EventBus"
 @onready var map: Map = $"%TileMap"
 @onready var ui_resources: HBoxContainer = $"%ResourceBar/%Resources"
-@onready var population_label: Label = ui_resources.get_node("Population") as Label
+@onready var population_label: Label = ui_resources.get_node("Population")
 
 
 func _ready():
@@ -24,6 +24,8 @@ func _ready():
 	map.connect("building_removed", _on_building_removed)
 	
 	event_bus.register_action_per_tick(update_resources)
+	increase_max_population()
+	_update_resource_ui()
 
 
 func _on_building_built(building):
@@ -66,12 +68,12 @@ func update_resources():
 
 
 func increase_max_population():
-	MAX_POPULATION += 1
+	MAX_POPULATION += 4
 	_update_resource_ui()
 
 
 func decrease_max_population():
-	MAX_POPULATION -= 1
+	MAX_POPULATION -= 4
 	_update_resource_ui()
 
 

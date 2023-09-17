@@ -69,6 +69,6 @@ func remove_building():
 	var building = buildings.query_building(cursor_position)
 	
 	if building != null:
-		print("building_removed(%s)" % building.name as String)
-		building_removed.emit(building.name as String)
+		print("building_removed(%s)" % building.get_meta("type"))
+		building_removed.emit(building.get_meta("type"))
 		building.queue_free()

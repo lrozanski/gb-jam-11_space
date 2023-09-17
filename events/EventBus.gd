@@ -4,6 +4,7 @@ class_name EventBus
 static var SECONDS_PER_TICK
 
 @onready var game_logic_tick: Timer = $"GameLogicTick"
+@onready var logic_tick_progress_bar: TextureProgressBar = $"%ResourceBar/%Resources/%TextureProgressBar"
 
 var registered_actions: Array[Callable] = []
 var registered_oneshot_actions: Array[Callable] = []
@@ -12,6 +13,10 @@ var registered_oneshot_actions: Array[Callable] = []
 func _ready():
 	SECONDS_PER_TICK = game_logic_tick.wait_time
 	game_logic_tick.connect("timeout", logic_tick)
+
+
+func _process(delta: float):
+	logic_tick_progress_bar.value = (game_logic_tick.wait_time - game_logic_tick.time_left) / game_logic_tick.wait_time
 
 
 func register_action_per_tick(action: Callable):

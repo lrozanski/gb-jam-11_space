@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://e1bc40hbyw57"]
+[gd_scene load_steps=3 format=3 uid="uid://e1bc40hbyw57"]
 
 [ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_v4usn"]
+[ext_resource type="Texture2D" uid="uid://q0p6rm4kb7ed" path="res://ui/sprites/white_texture.png" id="2_tsgia"]
 
 [node name="ResourceBar" type="PanelContainer"]
 custom_minimum_size = Vector2(640, 60)
@@ -20,6 +21,22 @@ theme_override_constants/margin_right = 16
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 64
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Resources"]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/Resources/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.025
+nine_patch_stretch = true
+texture_under = ExtResource("2_tsgia")
+texture_progress = ExtResource("2_tsgia")
+tint_under = Color(0.188235, 0.407843, 0.313726, 1)
+tint_progress = Color(0.52549, 0.752941, 0.423529, 1)
 
 [node name="Population" type="Label" parent="MarginContainer/Resources"]
 layout_mode = 2

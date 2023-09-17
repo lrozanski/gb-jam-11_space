@@ -8,6 +8,7 @@ size = Vector2(64, 64)
 [node name="Farm" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
+metadata/type = "Farm"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
