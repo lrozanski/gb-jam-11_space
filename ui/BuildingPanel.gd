@@ -1,8 +1,7 @@
-extends PanelContainer
+extends GridContainer
 class_name BuildingPanel
 
-@onready var cursor: Cursor = $"%Cursor"
-@onready var building_label: Label = $"MarginContainer/Rows/BuildingLabel"
+@onready var indicator: Label = $"Pipe/Indicator"
 
 static var BUILDING_NAME: String = ""
 
@@ -16,25 +15,13 @@ var max_index: int = -1
 var paused = false
 
 func _ready():
-	cursor.connect("construct_building", show_panel, CONNECT_DEFERRED)
-	building_buttons = get_node("MarginContainer/Rows/Buildings").get_children()
+	building_buttons = get_children()
 	max_index = building_buttons.size()
 	_update_building_name(building_buttons[building_index].name as String)
 
 
-func show_panel():
-	visible = true
-	queue_redraw()
-
-
-func hide_panel():
-	visible = false
-	paused = true
-
-
 func _update_building_name(name: String):
 	BUILDING_NAME = name
-	building_label.text = name
 	
 
 func _process(_delta):
@@ -50,12 +37,9 @@ func _process(_delta):
 
 	if building_index != current_building_index:
 		building_index = wrapi(building_index, 0, max_index)
-		(building_buttons[building_index] as Button).grab_focus()
 		_update_building_name(building_buttons[building_index].name as String)
 
 	if Input.is_action_just_pressed("Confirm"):
 		construction_confirmed.emit()
-		hide_panel()
 	elif Input.is_action_just_pressed("Cancel"):
 		construction_canceled.emit()
-		hide_panel()

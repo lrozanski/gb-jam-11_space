@@ -15,7 +15,7 @@ func _process(delta):
 		return
 	
 	# Movement
-	var bounds: Rect2 = get_viewport_rect()
+	var bounds: Vector2 = get_viewport_rect().size
 	var direction: Vector2 = Vector2.ZERO
 	
 	if Input.is_action_just_pressed("Up"):
@@ -26,8 +26,13 @@ func _process(delta):
 		direction.x = -1
 	elif Input.is_action_just_pressed("Right"):
 		direction.x = 1
-		
-	if bounds.has_point(global_position + direction * Map.TILE_SIZE):
+	
+	var new_position = global_position + direction * Map.TILE_SIZE
+	
+	if (
+			new_position.x >= 0 && new_position.x < bounds.x && 
+			new_position.y >= Map.TILE_SIZE && new_position.y < bounds.y - Map.TILE_SIZE
+		):
 		global_position += direction * Map.TILE_SIZE
 	
 	# Building
