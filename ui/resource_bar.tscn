@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://e1bc40hbyw57"]
+
+[ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_v4usn"]
+
+[node name="ResourceBar" type="PanelContainer"]
+custom_minimum_size = Vector2(640, 60)
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -4.0
+offset_right = 640.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme = ExtResource("1_v4usn")

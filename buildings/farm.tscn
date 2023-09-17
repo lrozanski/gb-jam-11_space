@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqjee7ptrk2vj"]
+
+[ext_resource type="Texture2D" uid="uid://cty2ke0cb73qh" path="res://ui/icons/farm_field.tres" id="1_t5dtr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulwdm"]
+size = Vector2(64, 64)
+
+[node name="Farm" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_t5dtr")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_ulwdm")

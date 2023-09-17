@@ -5,7 +5,7 @@ static var CURSOR_MOVEABLE = true
 static var BUILDING_PANEL_OPEN = false
 
 @onready var cursor: Cursor = $"%Cursor"
-@onready var building_panel: BuildingPanel = $"%BuildingPanel"
+@onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
 
 
 func _on_building_panel_open():

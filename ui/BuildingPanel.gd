@@ -8,21 +8,21 @@ static var BUILDING_NAME: String = ""
 signal construction_confirmed
 signal construction_canceled
 
-var building_buttons: Array[Node] = []
+var buildings: Array[Node] = []
 var building_index: int = 0
 var max_index: int = -1
 
-var paused = false
-
 func _ready():
-	building_buttons = get_children()
-	max_index = building_buttons.size()
-	_update_building_name(building_buttons[building_index].name as String)
+	buildings = get_children()
+	max_index = buildings.size()
+	_update_building_name()
 
 
-func _update_building_name(name: String):
-	BUILDING_NAME = name
-	
+func _update_building_name():
+	var building = buildings[building_index]
+	BUILDING_NAME = building.name as String
+	indicator.reparent(building, false)
+
 
 func _process(_delta):
 	if !visible:
@@ -34,10 +34,14 @@ func _process(_delta):
 		building_index -= 1
 	elif Input.is_action_just_pressed("Right"):
 		building_index += 1
+	elif Input.is_action_just_pressed("Up"):
+		building_index -= columns
+	elif Input.is_action_just_pressed("Down"):
+		building_index += columns
 
 	if building_index != current_building_index:
 		building_index = wrapi(building_index, 0, max_index)
-		_update_building_name(building_buttons[building_index].name as String)
+		_update_building_name()
 
 	if Input.is_action_just_pressed("Confirm"):
 		construction_confirmed.emit()

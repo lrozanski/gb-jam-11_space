@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://6eitexebxyo"]
+
+[ext_resource type="Texture2D" uid="uid://dnke77a61w6fv" path="res://ui/icons/landing_pad.tres" id="1_etsnj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cds57"]
+size = Vector2(64, 64)
+
+[node name="Landing Pad" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_etsnj")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_cds57")

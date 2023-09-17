@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dunf7jjiy6pwf"]
+
+[ext_resource type="Texture2D" uid="uid://3kdmawlblux7" path="res://ui/icons/air_filter.tres" id="1_h8lwp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v117l"]
+size = Vector2(64, 64)
+
+[node name="Air Filter" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_h8lwp")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_v117l")

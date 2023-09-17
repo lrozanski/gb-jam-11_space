@@ -37,10 +37,16 @@ func _process(delta):
 	
 	# Building
 	if Input.is_action_just_pressed("Confirm"):
-		var tile = map.local_to_map(map.to_local(global_position))
-		var is_building = map.get_cell_tile_data(1, tile) != null
+		var tile_center = global_position + Vector2(Map.TILE_SIZE / 2.0, Map.TILE_SIZE / 2.0)
 		
-		if is_building:
+		var params = PhysicsPointQueryParameters2D.new()
+		params.collision_mask = 0x2
+		params.position = tile_center
+		
+		var intersection = get_world_2d().direct_space_state.intersect_point(params)
+		var collider = intersection[0].get("collider") if intersection.size() > 0 else null
+		
+		if collider != null:
 			demolish_building.emit()
 			print("demolish_building")
 		else:

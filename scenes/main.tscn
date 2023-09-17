@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=9 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
 [ext_resource type="TileSet" uid="uid://ebhjv1afqvxo" path="res://map/tile_set.tres" id="2_18a4n"]
 [ext_resource type="Script" path="res://map/Map.gd" id="3_y7hv7"]
+[ext_resource type="PackedScene" uid="uid://uffjtjskvi4o" path="res://buildings/habitat.tscn" id="4_fwvdh"]
 [ext_resource type="PackedScene" uid="uid://y6yrdj5lulua" path="res://ui/cursor.tscn" id="4_owu4c"]
-[ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="5_gu34c"]
-[ext_resource type="Script" path="res://scenes/UI_Manager.gd" id="6_owbgk"]
-[ext_resource type="Script" path="res://ui/BuildingPanel.gd" id="7_dnd8j"]
+[ext_resource type="PackedScene" uid="uid://e1bc40hbyw57" path="res://ui/resource_bar.tscn" id="5_h757n"]
+[ext_resource type="PackedScene" uid="uid://dcgow4nu837wf" path="res://ui/status_bar.tscn" id="6_fdw0g"]
+[ext_resource type="Script" path="res://ui/UI_Manager.gd" id="7_lb7ba"]
 
 [node name="Scene" type="Node2D"]
 
@@ -32,95 +33,22 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(262150, 0, 2, 262148, 0, 2, 262147, 0, 2, 262149, 65536, 2, 196613, 65536, 1, 131077, 65536, 1, 327685, 65536, 1, 393221, 65536, 1, 262151, 0, 2, 196612, 0, 1, 196611, 0, 1, 131076, 0, 1, 131075, 0, 1, 262152, 131072, 2, 458757, 65536, 2, 327686, 131072, 1, 327687, 131072, 1, 393223, 131072, 1)
+layer_1/tile_data = PackedInt32Array()
 script = ExtResource("3_y7hv7")
+
+[node name="Buildings" type="Node" parent="."]
+
+[node name="Habitat" parent="Buildings" instance=ExtResource("4_fwvdh")]
+position = Vector2(256, 256)
 
 [node name="Cursor" parent="." instance=ExtResource("4_owu4c")]
 unique_name_in_owner = true
 position = Vector2(0, 64)
 
+[node name="ResourceBar" parent="." instance=ExtResource("5_h757n")]
+
+[node name="StatusBar" parent="." instance=ExtResource("6_fdw0g")]
+unique_name_in_owner = true
+
 [node name="UI_Manager" type="Node" parent="."]
-script = ExtResource("6_owbgk")
-
-[node name="ResourceBar" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(640, 60)
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = -4.0
-offset_right = 640.0
-offset_bottom = 56.0
-grow_horizontal = 2
-theme = ExtResource("5_gu34c")
-
-[node name="StatusBar" type="PanelContainer" parent="."]
-unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(640, 60)
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 516.0
-offset_right = 640.0
-offset_bottom = 576.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme = ExtResource("5_gu34c")
-
-[node name="MarginContainer" type="MarginContainer" parent="StatusBar"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 4
-
-[node name="BuildingPanel" type="GridContainer" parent="StatusBar/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 0
-columns = 3
-script = ExtResource("7_dnd8j")
-
-[node name="Pipe" type="Label" parent="StatusBar/MarginContainer/BuildingPanel"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-text = "Pipe"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Indicator" type="Label" parent="StatusBar/MarginContainer/BuildingPanel/Pipe"]
-layout_mode = 2
-offset_right = 128.0
-offset_bottom = 23.0
-text = ">"
-
-[node name="Habitat" type="Label" parent="StatusBar/MarginContainer/BuildingPanel"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-text = "Habitat"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Farm" type="Label" parent="StatusBar/MarginContainer/BuildingPanel"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-text = "Farm"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Air Filter" type="Label" parent="StatusBar/MarginContainer/BuildingPanel"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-text = "Air Filter"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Landing Pad" type="Label" parent="StatusBar/MarginContainer/BuildingPanel"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-text = "Landing Pad"
-horizontal_alignment = 2
-vertical_alignment = 1
+script = ExtResource("7_lb7ba")
