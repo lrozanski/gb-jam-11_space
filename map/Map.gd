@@ -70,7 +70,7 @@ func remove_building():
 		return
 	
 	var cursor_position = cursor.global_position
-	var building = buildings.query_building(cursor_position)
+	var building = buildings.query_building(cursor_position, get_world_2d())
 	
 	if building != null:
 		building_removed.emit(building.get_meta("type"))

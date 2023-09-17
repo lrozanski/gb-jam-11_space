@@ -33,12 +33,12 @@ func _process(_delta):
 	if (
 			new_position.x >= 0 && new_position.x < bounds.x && 
 			new_position.y >= Map.TILE_SIZE && new_position.y < bounds.y - Map.TILE_SIZE
-		):
+	):
 		global_position += direction * Map.TILE_SIZE
 	
 	# Building
 	if Input.is_action_just_pressed("Confirm"):
-		var building = buildings.query_building(global_position)
+		var building = buildings.query_building(global_position, get_world_2d())
 		
 		if building != null:
 			demolish_building.emit()

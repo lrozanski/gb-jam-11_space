@@ -1,4 +1,4 @@
-extends Building
+extends "res://buildings/Building.gd"
 class_name Pipe
 
 enum PipeVariant {
