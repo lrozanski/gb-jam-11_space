@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=13 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="PackedScene" uid="uid://eh41rjmcsbfa" path="res://ui/game_manager.tscn" id="1_3hkpm"]
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://e1bc40hbyw57" path="res://ui/resource_bar.tscn" id="5_h757n"]
 [ext_resource type="PackedScene" uid="uid://dcgow4nu837wf" path="res://ui/status_bar.tscn" id="6_fdw0g"]
 [ext_resource type="PackedScene" uid="uid://cibmnce83nix0" path="res://ui/ui_manager.tscn" id="10_0japa"]
+[ext_resource type="PackedScene" uid="uid://b1jc04cbov6rt" path="res://buildings/base_manager.tscn" id="12_m4xho"]
 
 [node name="Scene" type="Node2D"]
 
@@ -65,3 +66,5 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="UI_Manager" parent="." instance=ExtResource("10_0japa")]
+
+[node name="BaseManager" parent="." instance=ExtResource("12_m4xho")]

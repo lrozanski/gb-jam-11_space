@@ -1,7 +1,7 @@
 extends TileMap
 class_name Map
 
-signal building_built(building: String)
+signal building_built(building: String, tile_position: Vector2i)
 signal building_removed(building: String)
 
 static var SPRITE_SIZE: int = 16
@@ -24,8 +24,12 @@ func _ready():
 	remove_building_panel.connect("removal_confirmed", remove_building)
 
 
-func build_building():
-	var building_name = BuildingPanel.BUILDING_NAME
+func _get_cursor_tile_position():
+	var local_map_position = to_local(global_position)
+	return local_to_map(local_map_position)
+
+
+func build_building(building_name: String):
 	print("Built a %s" % building_name)
 	
 	match building_name:
@@ -58,7 +62,7 @@ func build_building():
 			instance.global_position = cursor.global_position
 			buildings.add_child(instance)
 	
-	building_built.emit(building_name)
+	building_built.emit(building_name, _get_cursor_tile_position())
 
 
 func remove_building():
@@ -69,6 +73,5 @@ func remove_building():
 	var building = buildings.query_building(cursor_position)
 	
 	if building != null:
-		print("building_removed(%s)" % building.get_meta("type"))
 		building_removed.emit(building.get_meta("type"))
 		building.queue_free()

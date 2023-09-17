@@ -15,7 +15,7 @@ func _ready():
 	game_logic_tick.connect("timeout", logic_tick)
 
 
-func _process(delta: float):
+func _process(_delta):
 	logic_tick_progress_bar.value = (game_logic_tick.wait_time - game_logic_tick.time_left) / game_logic_tick.wait_time
 
 

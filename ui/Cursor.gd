@@ -11,7 +11,7 @@ func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if !UI_Manager.CURSOR_MOVEABLE || UI_Manager.BUILDING_PANEL_OPEN:
 		return
 	

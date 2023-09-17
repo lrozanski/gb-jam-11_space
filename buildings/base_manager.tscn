@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1jc04cbov6rt"]
+
+[ext_resource type="Script" path="res://buildings/BaseManager.gd" id="1_gu8qy"]
+
+[node name="BaseManager" type="Node"]
+script = ExtResource("1_gu8qy")

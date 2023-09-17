@@ -29,7 +29,7 @@ func _ready():
 	_update_resource_ui()
 
 
-func _on_building_built(building):
+func _on_building_built(building: String, tile_position: Vector2i):
 	match building:
 		"H Pipe":
 			pass
@@ -45,7 +45,7 @@ func _on_building_built(building):
 			pass
 
 
-func _on_building_removed(building):
+func _on_building_removed(building: String):
 	match building:
 		"H Pipe":
 			pass

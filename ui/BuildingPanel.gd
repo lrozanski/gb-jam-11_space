@@ -3,14 +3,13 @@ class_name BuildingPanel
 
 @onready var indicator: Label = $"H Pipe/Indicator"
 
-static var BUILDING_NAME: String = ""
-
-signal construction_confirmed
+signal construction_confirmed(building: String)
 signal construction_canceled
 
 var buildings: Array[Node] = []
 var building_index: int = 0
 var max_index: int = -1
+var building_name: String = ""
 
 func _ready():
 	buildings = get_children()
@@ -20,7 +19,7 @@ func _ready():
 
 func _update_building_name():
 	var building = buildings[building_index]
-	BUILDING_NAME = building.name as String
+	building_name = building.name as String
 	indicator.reparent(building, false)
 
 
@@ -44,6 +43,6 @@ func _process(_delta):
 		_update_building_name()
 
 	if Input.is_action_just_pressed("Confirm"):
-		construction_confirmed.emit()
+		construction_confirmed.emit(building_name)
 	elif Input.is_action_just_pressed("Cancel"):
 		construction_canceled.emit()
