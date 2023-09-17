@@ -25,14 +25,19 @@ func get_tile_position():
 func _is_valid_pipe(first: Building, other: Building):
 	if not other is Pipe:
 		return false
+	
+	var first_tile_position = first.get_tile_position()
+	var other_tile_position = other.get_tile_position()
 		
 	if (
-		!is_equal_approx(first.global_position.x, other.global_position.x) &&
+		first_tile_position.x != other_tile_position.x &&
+		first_tile_position.y == other_tile_position.y &&
 		other.variant == Pipe.PipeVariant.HORIZONTAL
 	):
 		return true
 	elif (
-		!is_equal_approx(first.global_position.y, other.global_position.y) &&
+		first_tile_position.x == other_tile_position.x &&
+		first_tile_position.y != other_tile_position.y &&
 		other.variant == Pipe.PipeVariant.VERTICAL
 	):
 		return true
@@ -43,13 +48,13 @@ func _is_valid_pipe(first: Building, other: Building):
 func find_neighbouring_buildings(current: Building):
 	var world2d = get_world_2d()
 	var neighbouring_buildings = [
-		Buildings.query_building(global_position + Vector2(-Map.TILE_SIZE, 0), world2d),
-		Buildings.query_building(global_position + Vector2(Map.TILE_SIZE, 0), world2d),
-		Buildings.query_building(global_position + Vector2(0, -Map.TILE_SIZE), world2d),
-		Buildings.query_building(global_position + Vector2(0, Map.TILE_SIZE), world2d),
+		Buildings.query_building(current.global_position + Vector2(-Map.TILE_SIZE, 0), world2d),
+		Buildings.query_building(current.global_position + Vector2(Map.TILE_SIZE, 0), world2d),
+		Buildings.query_building(current.global_position + Vector2(0, -Map.TILE_SIZE), world2d),
+		Buildings.query_building(current.global_position + Vector2(0, Map.TILE_SIZE), world2d),
 	]
-	var actual_buildings = []
-	var allow_only_pipes = true if (not self is Pipe) else false
+	var actual_buildings: Array[Building] = []
+	var allow_only_pipes = true if (not current is Pipe) else false
 	
 	for building in neighbouring_buildings:
 		if building == null:
@@ -58,24 +63,31 @@ func find_neighbouring_buildings(current: Building):
 			continue
 		if building is Pipe && !_is_valid_pipe(current, building):
 			continue
+		if current is Pipe && building is Pipe:
+			if (current as Pipe).variant != (building as Pipe).variant:
+				continue
 		
-		actual_buildings.append(building)
+		actual_buildings.append(building as Building)
 	
 	return actual_buildings
 
 
-func update_connections(connection_changed_tile_position: Vector2i, new_state: bool):
-	var initial_connections = find_neighbouring_buildings(self)
-	var open: Array[Building] = []
-	var closed: Dictionary = {connection_changed_tile_position: null}
-	
-	open.append_array(initial_connections)
+func update_connections(start_tile_position: Vector2i, new_state: bool):
+	var open: Array[Building] = find_neighbouring_buildings(self)
+	var closed: Dictionary = {start_tile_position: true}
+	var closed_array: Array[Vector2i] = []
 	
 	while open.size() > 0:
 		var current = open[0]
 		open.remove_at(0)
 		
-		if current.disabled:
+		if closed.has(current.get_tile_position()):
+			continue
+		
+		closed[current.get_tile_position()] = true
+		closed_array.append(current.get_tile_position())
+		
+		if current.disabled != new_state:
 			current.disabled = new_state
 		
 		var neighbours = find_neighbouring_buildings(current)
@@ -84,4 +96,6 @@ func update_connections(connection_changed_tile_position: Vector2i, new_state: b
 				continue
 			
 			open.append(neighbour)
+	
+	return closed_array
 
