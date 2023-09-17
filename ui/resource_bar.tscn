@@ -6,8 +6,29 @@
 custom_minimum_size = Vector2(640, 60)
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = -4.0
 offset_right = 640.0
-offset_bottom = 56.0
+offset_bottom = 60.0
 grow_horizontal = 2
 theme = ExtResource("1_v4usn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="Resources" type="HBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Population" type="Label" parent="MarginContainer/Resources"]
+layout_mode = 2
+text = "POP: 1 / 1"
+
+[node name="Food" type="Label" parent="MarginContainer/Resources"]
+layout_mode = 2
+text = "F: 1 / 1"
+
+[node name="Oxygen" type="Label" parent="MarginContainer/Resources"]
+layout_mode = 2
+text = "O2: 1 / 1"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://uffjtjskvi4o"]
+[gd_scene load_steps=4 format=3 uid="uid://uffjtjskvi4o"]
 
 [ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="1_exre7"]
+[ext_resource type="Script" path="res://buildings/Habitat.gd" id="1_kryie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6kw2"]
 size = Vector2(64, 64)
@@ -8,6 +9,7 @@ size = Vector2(64, 64)
 [node name="Habitat" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("1_kryie")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)

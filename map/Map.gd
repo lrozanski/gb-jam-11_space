@@ -1,6 +1,9 @@
 extends TileMap
 class_name Map
 
+signal building_built(building: String)
+signal building_removed(building: String)
+
 static var SPRITE_SIZE: int = 16
 static var TILE_SCALE: int = 4
 static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
@@ -16,7 +19,6 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
 @onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
 
-
 func _ready():
 	building_panel.connect("construction_confirmed", build_building)
 	remove_building_panel.connect("removal_confirmed", remove_building)
@@ -29,32 +31,34 @@ func build_building():
 	match building_name:
 		"H Pipe":
 			var instance = pipe_scene.instantiate() as Pipe
-			get_tree().current_scene.add_child(instance)
+			buildings.add_child(instance)
 			
 			instance.variant = Pipe.PipeVariant.HORIZONTAL
 			instance.global_position = cursor.global_position
 		"V Pipe":
 			var instance = pipe_scene.instantiate() as Pipe
-			get_tree().current_scene.add_child(instance)
+			buildings.add_child(instance)
 			
 			instance.variant = Pipe.PipeVariant.VERTICAL
 			instance.global_position = cursor.global_position
 		"Habitat":
-			var instance = habitat_scene.instantiate() as Node2D
+			var instance = habitat_scene.instantiate() as Habitat
 			instance.global_position = cursor.global_position
-			get_tree().current_scene.add_child(instance)
+			buildings.add_child(instance)
 		"Farm":
 			var instance = farm_scene.instantiate() as Node2D
 			instance.global_position = cursor.global_position
-			get_tree().current_scene.add_child(instance)
+			buildings.add_child(instance)
 		"Air Filter":
 			var instance = air_filter_scene.instantiate() as Node2D
 			instance.global_position = cursor.global_position
-			get_tree().current_scene.add_child(instance)
+			buildings.add_child(instance)
 		"Landing Pad":
 			var instance = landing_pad_scene.instantiate() as Node2D
 			instance.global_position = cursor.global_position
-			get_tree().current_scene.add_child(instance)
+			buildings.add_child(instance)
+	
+	building_built.emit(building_name)
 
 
 func remove_building():
@@ -65,4 +69,6 @@ func remove_building():
 	var building = buildings.query_building(cursor_position)
 	
 	if building != null:
+		print("building_removed(%s)" % building.name as String)
+		building_removed.emit(building.name as String)
 		building.queue_free()

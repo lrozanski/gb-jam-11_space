@@ -1,18 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=11 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
 [ext_resource type="TileSet" uid="uid://ebhjv1afqvxo" path="res://map/tile_set.tres" id="2_18a4n"]
+[ext_resource type="PackedScene" uid="uid://2rexuoupludk" path="res://resources/resource_manager.tscn" id="2_e6s0p"]
 [ext_resource type="Script" path="res://map/Map.gd" id="3_y7hv7"]
 [ext_resource type="PackedScene" uid="uid://uffjtjskvi4o" path="res://buildings/habitat.tscn" id="4_fwvdh"]
 [ext_resource type="Script" path="res://map/Buildings.gd" id="4_jiryw"]
 [ext_resource type="PackedScene" uid="uid://y6yrdj5lulua" path="res://ui/cursor.tscn" id="4_owu4c"]
 [ext_resource type="PackedScene" uid="uid://e1bc40hbyw57" path="res://ui/resource_bar.tscn" id="5_h757n"]
 [ext_resource type="PackedScene" uid="uid://dcgow4nu837wf" path="res://ui/status_bar.tscn" id="6_fdw0g"]
-[ext_resource type="Script" path="res://ui/UI_Manager.gd" id="7_lb7ba"]
+[ext_resource type="PackedScene" uid="uid://cibmnce83nix0" path="res://ui/ui_manager.tscn" id="10_0japa"]
 
 [node name="Scene" type="Node2D"]
 
 [node name="EventBus" parent="." instance=ExtResource("1_mr1qb")]
+unique_name_in_owner = true
+
+[node name="ResourceManager" parent="." instance=ExtResource("2_e6s0p")]
+unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
@@ -49,11 +54,9 @@ unique_name_in_owner = true
 position = Vector2(0, 64)
 
 [node name="ResourceBar" parent="." instance=ExtResource("5_h757n")]
-offset_top = 0.0
-offset_bottom = 60.0
+unique_name_in_owner = true
 
 [node name="StatusBar" parent="." instance=ExtResource("6_fdw0g")]
 unique_name_in_owner = true
 
-[node name="UI_Manager" type="Node" parent="."]
-script = ExtResource("7_lb7ba")
+[node name="UI_Manager" parent="." instance=ExtResource("10_0japa")]

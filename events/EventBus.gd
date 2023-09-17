@@ -1,4 +1,7 @@
 extends Node
+class_name EventBus
+
+static var SECONDS_PER_TICK
 
 @onready var game_logic_tick: Timer = $"GameLogicTick"
 
@@ -7,10 +10,8 @@ var registered_oneshot_actions: Array[Callable] = []
 
 
 func _ready():
+	SECONDS_PER_TICK = game_logic_tick.wait_time
 	game_logic_tick.connect("timeout", logic_tick)
-	
-	register_action_oneshot(func(): print("Started"))
-	register_action_per_tick(func(): print("Tick"))
 
 
 func register_action_per_tick(action: Callable):
