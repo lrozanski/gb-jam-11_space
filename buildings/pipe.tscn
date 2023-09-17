@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgt6wn31sunjk"]
+[gd_scene load_steps=5 format=3 uid="uid://cgt6wn31sunjk"]
 
 [ext_resource type="Texture2D" uid="uid://bvj5c4gcyaqcq" path="res://ui/icons/pipe.tres" id="1_04t1v"]
+[ext_resource type="Script" path="res://buildings/Pipe.gd" id="1_sxpsw"]
+[ext_resource type="Texture2D" uid="uid://cbx157jbl33t1" path="res://ui/icons/pipe_vertical.tres" id="3_qut78"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywe3g"]
 size = Vector2(64, 64)
@@ -8,10 +10,17 @@ size = Vector2(64, 64)
 [node name="Pipe" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("1_sxpsw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Horizontal" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("1_04t1v")
+centered = false
+
+[node name="Vertical" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+texture = ExtResource("3_qut78")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

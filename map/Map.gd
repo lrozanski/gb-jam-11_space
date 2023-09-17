@@ -12,11 +12,14 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @export var landing_pad_scene: PackedScene = preload("res://buildings/landing_pad.tscn")
 
 @onready var cursor: Cursor = $"%Cursor"
+@onready var buildings: Buildings = $"%Buildings"
 @onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
+@onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
 
 
 func _ready():
 	building_panel.connect("construction_confirmed", build_building)
+	remove_building_panel.connect("removal_confirmed", remove_building)
 
 
 func build_building():
@@ -24,10 +27,18 @@ func build_building():
 	print("Built a %s" % building_name)
 	
 	match building_name:
-		"Pipe":
-			var instance = pipe_scene.instantiate() as Node2D
-			instance.global_position = cursor.global_position
+		"H Pipe":
+			var instance = pipe_scene.instantiate() as Pipe
 			get_tree().current_scene.add_child(instance)
+			
+			instance.variant = Pipe.PipeVariant.HORIZONTAL
+			instance.global_position = cursor.global_position
+		"V Pipe":
+			var instance = pipe_scene.instantiate() as Pipe
+			get_tree().current_scene.add_child(instance)
+			
+			instance.variant = Pipe.PipeVariant.VERTICAL
+			instance.global_position = cursor.global_position
 		"Habitat":
 			var instance = habitat_scene.instantiate() as Node2D
 			instance.global_position = cursor.global_position
@@ -44,3 +55,14 @@ func build_building():
 			var instance = landing_pad_scene.instantiate() as Node2D
 			instance.global_position = cursor.global_position
 			get_tree().current_scene.add_child(instance)
+
+
+func remove_building():
+	if !RemoveBuildingPanel.CHOICE:
+		return
+	
+	var cursor_position = cursor.global_position
+	var building = buildings.query_building(cursor_position)
+	
+	if building != null:
+		building.queue_free()

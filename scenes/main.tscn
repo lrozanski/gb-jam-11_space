@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=10 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
 [ext_resource type="TileSet" uid="uid://ebhjv1afqvxo" path="res://map/tile_set.tres" id="2_18a4n"]
 [ext_resource type="Script" path="res://map/Map.gd" id="3_y7hv7"]
 [ext_resource type="PackedScene" uid="uid://uffjtjskvi4o" path="res://buildings/habitat.tscn" id="4_fwvdh"]
+[ext_resource type="Script" path="res://map/Buildings.gd" id="4_jiryw"]
 [ext_resource type="PackedScene" uid="uid://y6yrdj5lulua" path="res://ui/cursor.tscn" id="4_owu4c"]
 [ext_resource type="PackedScene" uid="uid://e1bc40hbyw57" path="res://ui/resource_bar.tscn" id="5_h757n"]
 [ext_resource type="PackedScene" uid="uid://dcgow4nu837wf" path="res://ui/status_bar.tscn" id="6_fdw0g"]
@@ -36,7 +37,9 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("3_y7hv7")
 
-[node name="Buildings" type="Node" parent="."]
+[node name="Buildings" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_jiryw")
 
 [node name="Habitat" parent="Buildings" instance=ExtResource("4_fwvdh")]
 position = Vector2(256, 256)
@@ -46,6 +49,8 @@ unique_name_in_owner = true
 position = Vector2(0, 64)
 
 [node name="ResourceBar" parent="." instance=ExtResource("5_h757n")]
+offset_top = 0.0
+offset_bottom = 60.0
 
 [node name="StatusBar" parent="." instance=ExtResource("6_fdw0g")]
 unique_name_in_owner = true

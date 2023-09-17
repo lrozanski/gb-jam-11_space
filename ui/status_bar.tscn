@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcgow4nu837wf"]
+[gd_scene load_steps=4 format=3 uid="uid://dcgow4nu837wf"]
 
 [ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_kt5ma"]
 [ext_resource type="PackedScene" uid="uid://c8033wiuyjm2d" path="res://ui/building_panel.tscn" id="2_2f8ut"]
+[ext_resource type="PackedScene" uid="uid://87464sugi17e" path="res://ui/remove_building_panel.tscn" id="3_8lwki"]
 
 [node name="StatusBar" type="PanelContainer"]
 clip_contents = true
@@ -27,5 +28,9 @@ theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 4
 
 [node name="BuildingPanel" parent="MarginContainer" instance=ExtResource("2_2f8ut")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RemoveBuildingPanel" parent="MarginContainer" instance=ExtResource("3_8lwki")]
 unique_name_in_owner = true
 layout_mode = 2

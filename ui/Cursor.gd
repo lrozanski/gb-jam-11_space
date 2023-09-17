@@ -2,6 +2,7 @@ extends Node2D
 class_name Cursor
 
 @onready var map: Map = $"%TileMap"
+@onready var buildings: Buildings = $"%Buildings"
 
 signal construct_building
 signal demolish_building
@@ -37,16 +38,9 @@ func _process(delta):
 	
 	# Building
 	if Input.is_action_just_pressed("Confirm"):
-		var tile_center = global_position + Vector2(Map.TILE_SIZE / 2.0, Map.TILE_SIZE / 2.0)
+		var building = buildings.query_building(global_position)
 		
-		var params = PhysicsPointQueryParameters2D.new()
-		params.collision_mask = 0x2
-		params.position = tile_center
-		
-		var intersection = get_world_2d().direct_space_state.intersect_point(params)
-		var collider = intersection[0].get("collider") if intersection.size() > 0 else null
-		
-		if collider != null:
+		if building != null:
 			demolish_building.emit()
 			print("demolish_building")
 		else:

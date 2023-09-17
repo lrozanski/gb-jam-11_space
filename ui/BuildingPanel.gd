@@ -1,7 +1,7 @@
 extends GridContainer
 class_name BuildingPanel
 
-@onready var indicator: Label = $"Pipe/Indicator"
+@onready var indicator: Label = $"H Pipe/Indicator"
 
 static var BUILDING_NAME: String = ""
 
