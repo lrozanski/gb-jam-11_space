@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Building
 class_name Pipe
 
 enum PipeVariant {

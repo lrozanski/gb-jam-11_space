@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqjee7ptrk2vj"]
+[gd_scene load_steps=4 format=3 uid="uid://bqjee7ptrk2vj"]
 
 [ext_resource type="Texture2D" uid="uid://cty2ke0cb73qh" path="res://ui/icons/farm_field.tres" id="1_t5dtr"]
+[ext_resource type="Script" path="res://buildings/Farm.gd" id="1_u7cfd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulwdm"]
 size = Vector2(64, 64)
@@ -8,6 +9,7 @@ size = Vector2(64, 64)
 [node name="Farm" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("1_u7cfd")
 metadata/type = "Farm"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

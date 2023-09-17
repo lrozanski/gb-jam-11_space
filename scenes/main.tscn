@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=12 format=3 uid="uid://shqk8wkaq2x"]
 
+[ext_resource type="PackedScene" uid="uid://eh41rjmcsbfa" path="res://ui/game_manager.tscn" id="1_3hkpm"]
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
 [ext_resource type="TileSet" uid="uid://ebhjv1afqvxo" path="res://map/tile_set.tres" id="2_18a4n"]
 [ext_resource type="PackedScene" uid="uid://2rexuoupludk" path="res://resources/resource_manager.tscn" id="2_e6s0p"]
@@ -12,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://cibmnce83nix0" path="res://ui/ui_manager.tscn" id="10_0japa"]
 
 [node name="Scene" type="Node2D"]
+
+[node name="GameManager" parent="." instance=ExtResource("1_3hkpm")]
+unique_name_in_owner = true
 
 [node name="EventBus" parent="." instance=ExtResource("1_mr1qb")]
 unique_name_in_owner = true
@@ -48,6 +52,7 @@ script = ExtResource("4_jiryw")
 
 [node name="Habitat" parent="Buildings" instance=ExtResource("4_fwvdh")]
 position = Vector2(256, 256)
+max_population = null
 
 [node name="Cursor" parent="." instance=ExtResource("4_owu4c")]
 unique_name_in_owner = true

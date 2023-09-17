@@ -1,6 +1,8 @@
 extends Node
 class_name ResourceManager
 
+signal population_changed
+
 static var POPULATION = 1
 static var MAX_POPULATION = 0
 static var FOOD = 0
@@ -11,7 +13,6 @@ static var FOOD_PER_TICK = 0
 static var OXYGEN_PER_TICK = 0
 
 static var POPULATION_PER_SECOND = 0.2
-
 
 @onready var event_bus: EventBus = $"%EventBus"
 @onready var map: Map = $"%TileMap"
@@ -64,17 +65,21 @@ func update_resources():
 	POPULATION += POPULATION_PER_TICK
 	FOOD += FOOD_PER_TICK
 	OXYGEN += OXYGEN_PER_TICK
+	
 	_update_resource_ui()
+	population_changed.emit()
 
 
 func increase_max_population():
 	MAX_POPULATION += 4
 	_update_resource_ui()
+	population_changed.emit()
 
 
 func decrease_max_population():
 	MAX_POPULATION -= 4
 	_update_resource_ui()
+	population_changed.emit()
 
 
 func _update_resource_ui():
