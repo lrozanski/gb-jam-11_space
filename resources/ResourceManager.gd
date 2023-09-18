@@ -10,7 +10,7 @@ static var OXYGEN = 0
 
 static var POPULATION_PER_TICK = 1
 static var FOOD_PER_TICK = 0
-static var OXYGEN_PER_TICK = 0
+static var OXYGEN_PER_TICK = -1
 
 static var POPULATION_PER_SECOND = 0.2
 
@@ -37,7 +37,8 @@ func _on_building_built(building: String, _tile_position: Vector2i):
 		"V Pipe":
 			pass
 		"Habitat":
-			increase_max_population()
+			#increase_max_population()
+			pass
 		"Farm":
 			pass
 		"Air Filter":
@@ -47,13 +48,21 @@ func _on_building_built(building: String, _tile_position: Vector2i):
 
 
 func _on_building_removed(building: String):
-	match building:
+	on_building_state_changed(building, false)
+
+
+func on_building_state_changed(type: String, disabled: bool):
+	match type:
 		"H Pipe":
 			pass
 		"V Pipe":
 			pass
 		"Habitat":
-			decrease_max_population()
+			if disabled:
+				decrease_max_population()
+			else:
+				print("increasing max pop")
+				increase_max_population()
 		"Farm":
 			pass
 		"Air Filter":

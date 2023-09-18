@@ -1,21 +1,30 @@
 extends StaticBody2D
 class_name Building
 
-signal activated
-signal deactivated
+signal activated(type: String, disabled: bool)
+signal deactivated(type: String, disabled: bool)
 
-@export var disabled: bool = false:
+@export var disabled: bool = true:
 	set(value):
+		if disabled == value:
+			return
 		disabled = value
+		
 		if disabled:
-			deactivated.emit()
+			deactivated.emit(get_meta("type"), disabled)
 		else:
-			activated.emit()
+			activated.emit(get_meta("type"), disabled)
 
 @export var is_hq: bool = false
 
 @onready var map: Map = $"/root/Scene/%TileMap"
+@onready var resource_manager: ResourceManager = $"/root/Scene/%ResourceManager"
 @onready var disabled_overlay: AnimatedSprite2D = $"DisabledOverlay";
+
+
+func _ready():
+	connect("activated", resource_manager.on_building_state_changed)
+	connect("deactivated", resource_manager.on_building_state_changed)
 
 
 func get_tile_position():

@@ -3,6 +3,7 @@ class_name BaseManager
 
 @onready var map: Map = $"%TileMap"
 @onready var buildings: Buildings = $"%Buildings"
+@onready var timer: Timer = $"Timer"
 
 var enabled_buildings: Array[Building] = []
 var disabled_buildings: Array[Building] = []
@@ -13,9 +14,16 @@ var process = false
 var process_params = {}
 
 func _ready():
-	map.connect("building_built", _on_building_built, CONNECT_DEFERRED)
+	#map.connect("building_built", _on_building_built, CONNECT_DEFERRED)
+	map.connect("building_built", _on_timeout)
+	map.connect("building_removed", _on_timeout)
+	timer.connect("timeout", _on_building_built)
 	
 	font = ThemeDB.fallback_font
+
+
+func _on_timeout(_building_name: String = "", _tile_position: Vector2i = Vector2i.ZERO):
+	timer.start()
 
 
 func _tile_to_global(tile_position: Vector2i):
@@ -25,16 +33,16 @@ func _tile_to_global(tile_position: Vector2i):
 
 # FIXME: Investigate this!
 # FIXME: This has a bug that occurs for some connections, but not others
-func _on_building_built(building_name: String, tile_position: Vector2i):
-	if !process:
-		process = true
-		process_params = {
-			"building_name": building_name,
-			"tile_position": tile_position
-		}
-		return
+func _on_building_built():
+	# if !process:
+	# 	process = true
+	# 	process_params = {
+	# 		"building_name": building_name,
+	# 		"tile_position": tile_position
+	# 	}
+	# 	return
 	
-	process = false
+	# process = false
 	
 	enabled_buildings.clear()
 	disabled_buildings.clear()
@@ -58,11 +66,11 @@ func _on_building_built(building_name: String, tile_position: Vector2i):
 	queue_redraw()
 
 
-func _process(_delta):
-	if process:
-		_on_building_built(process_params.get("building_name"), process_params.get("tile_position"))
-		process = false
-		process_params = {}
+# func _process(_delta):
+# 	if process:
+# 		_on_building_built(process_params.get("building_name"), process_params.get("tile_position"))
+# 		process = false
+# 		process_params = {}
 
 
 func _draw():

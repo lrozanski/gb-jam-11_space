@@ -54,6 +54,7 @@ script = ExtResource("4_jiryw")
 
 [node name="Habitat" parent="Buildings" groups=["hq"] instance=ExtResource("4_fwvdh")]
 position = Vector2(256, 256)
+disabled = false
 is_hq = true
 
 [node name="Cursor" parent="." instance=ExtResource("4_owu4c")]
