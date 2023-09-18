@@ -17,16 +17,17 @@ static var POPULATION_PER_SECOND = 0.2
 @onready var event_bus: EventBus = $"%EventBus"
 @onready var map: Map = $"%TileMap"
 @onready var ui_resources: HBoxContainer = $"%ResourceBar/%Resources"
-@onready var population_label: Label = ui_resources.get_node("Population")
+@onready var population_label: ResourceLabel = ui_resources.get_node("Population")
+@onready var food_label: ResourceLabel = ui_resources.get_node("Food")
+@onready var oxygen_label: ResourceLabel = ui_resources.get_node("Oxygen")
 
 
 func _ready():
 	map.connect("building_built", _on_building_built)
 	map.connect("building_removed", _on_building_removed)
-	
+
 	event_bus.register_action_per_tick(update_resources)
 	increase_max_population()
-	_update_resource_ui()
 
 
 func _on_building_built(building: String, _tile_position: Vector2i):
@@ -65,7 +66,7 @@ func update_resources():
 	POPULATION += POPULATION_PER_TICK
 	FOOD += FOOD_PER_TICK
 	OXYGEN += OXYGEN_PER_TICK
-	
+
 	_update_resource_ui()
 	population_changed.emit()
 
@@ -83,4 +84,6 @@ func decrease_max_population():
 
 
 func _update_resource_ui():
-	population_label.text = "POP: %s / %s" % [POPULATION, MAX_POPULATION]
+	population_label.update_label(POPULATION, POPULATION_PER_TICK, MAX_POPULATION)
+	food_label.update_label(FOOD, FOOD_PER_TICK)
+	oxygen_label.update_label(OXYGEN, OXYGEN_PER_TICK)

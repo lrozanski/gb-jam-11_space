@@ -67,6 +67,8 @@ func find_neighbouring_buildings(current: Building):
 		if current is Pipe && building is Pipe:
 			if (current as Pipe).variant != (building as Pipe).variant:
 				continue
+		if current is Pipe && not building is Pipe && !_is_valid_pipe(building, current):
+			continue
 		
 		actual_buildings.append(building as Building)
 	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://e1bc40hbyw57"]
+[gd_scene load_steps=4 format=3 uid="uid://e1bc40hbyw57"]
 
 [ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_v4usn"]
 [ext_resource type="Texture2D" uid="uid://q0p6rm4kb7ed" path="res://ui/sprites/white_texture.png" id="2_tsgia"]
+[ext_resource type="PackedScene" uid="uid://ddiladv4y0wwx" path="res://ui/resource_label.tscn" id="3_idjdk"]
 
 [node name="ResourceBar" type="PanelContainer"]
 custom_minimum_size = Vector2(640, 60)
@@ -38,14 +39,14 @@ texture_progress = ExtResource("2_tsgia")
 tint_under = Color(0.188235, 0.407843, 0.313726, 1)
 tint_progress = Color(0.52549, 0.752941, 0.423529, 1)
 
-[node name="Population" type="Label" parent="MarginContainer/Resources"]
+[node name="Population" parent="MarginContainer/Resources" instance=ExtResource("3_idjdk")]
 layout_mode = 2
-text = "POP: 1 / 1"
+label = "POP"
 
-[node name="Food" type="Label" parent="MarginContainer/Resources"]
+[node name="Food" parent="MarginContainer/Resources" instance=ExtResource("3_idjdk")]
 layout_mode = 2
-text = "F: 1 / 1"
+label = "FOOD"
 
-[node name="Oxygen" type="Label" parent="MarginContainer/Resources"]
+[node name="Oxygen" parent="MarginContainer/Resources" instance=ExtResource("3_idjdk")]
 layout_mode = 2
-text = "O2: 1 / 1"
+label = "O2"
