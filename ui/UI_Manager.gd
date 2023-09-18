@@ -47,6 +47,10 @@ func _on_remove_building_panel_close(_choice: bool = false):
 
 
 func _ready():
+	CURSOR_MOVEABLE = true
+	BUILDING_PANEL_OPEN = false
+	REMOVE_BUILDING_PANEL_OPEN = false
+
 	cursor.connect("construct_building", _on_building_panel_open, CONNECT_DEFERRED)
 	cursor.connect("demolish_building", _on_remove_building_panel_open, CONNECT_DEFERRED)
 	
