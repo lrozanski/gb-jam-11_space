@@ -41,7 +41,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("Confirm"):
 		var building = Buildings.query_building(global_position, get_world_2d())
 		
-		if building != null:
+		if is_instance_valid(building) && building != null:
+			if building.is_hq:
+				return
 			demolish_building.emit()
 			print("demolish_building")
 		else:

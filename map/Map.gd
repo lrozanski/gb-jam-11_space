@@ -2,7 +2,7 @@ extends TileMap
 class_name Map
 
 signal building_built(building: String, tile_position: Vector2i)
-signal building_removed(building: String)
+signal building_removed(building: String, disabled: bool)
 
 static var SPRITE_SIZE: int = 16
 static var TILE_SCALE: int = 4
@@ -73,5 +73,5 @@ func remove_building(remove: bool):
 	var building = Buildings.query_building(cursor_position, get_world_2d())
 	
 	if building != null:
-		building_removed.emit(building.get_meta("type"))
+		building_removed.emit(building.get_meta("type"), building.disabled)
 		building.queue_free()

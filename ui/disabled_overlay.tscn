@@ -25,7 +25,6 @@ animations = [{
 }]
 
 [node name="DisabledOverlay" type="AnimatedSprite2D"]
-visible = false
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_3dsol")
 centered = false

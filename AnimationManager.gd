@@ -3,6 +3,7 @@ extends Node
 
 @onready var map: TileMap = $"%TileMap"
 @onready var cursor: Cursor = $"%Cursor"
+@onready var scene_tree: SceneTree = get_tree()
 
 
 func _ready():
@@ -14,7 +15,7 @@ func _on_building_built(_building_name: String, _tile_position: Vector2i):
 	_update_global_animations()
 
 
-func _on_building_removed(_building_name: String):
+func _on_building_removed(_building_name: String, _disabled: bool):
 	_update_global_animations()
 
 
@@ -24,7 +25,7 @@ func _update_global_animations():
 	for item in buildings:
 		var building = item as Building
 
-		if building.disabled:
+		if is_instance_valid(building) && building.disabled:
 			building.restart_animations()
 	
 	cursor.restart_animation()

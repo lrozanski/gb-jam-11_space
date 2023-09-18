@@ -20,11 +20,18 @@ signal deactivated(type: String, disabled: bool)
 @onready var map: Map = $"/root/Scene/%TileMap"
 @onready var resource_manager: ResourceManager = $"/root/Scene/%ResourceManager"
 @onready var disabled_overlay: AnimatedSprite2D = $"DisabledOverlay";
+@onready var world_2d: World2D
 
 
 func _ready():
+	world_2d = get_viewport().find_world_2d()
+
 	connect("activated", resource_manager.on_building_state_changed)
 	connect("deactivated", resource_manager.on_building_state_changed)
+
+	if is_hq:
+		disabled_overlay.stop()
+		disabled_overlay.visible = false
 
 
 func get_tile_position():
@@ -56,18 +63,17 @@ func _is_valid_pipe(first: Building, other: Building):
 
 
 func find_neighbouring_buildings(current: Building):
-	var world2d = get_world_2d()
 	var neighbouring_buildings = [
-		Buildings.query_building(current.global_position + Vector2(-Map.TILE_SIZE, 0), world2d),
-		Buildings.query_building(current.global_position + Vector2(Map.TILE_SIZE, 0), world2d),
-		Buildings.query_building(current.global_position + Vector2(0, -Map.TILE_SIZE), world2d),
-		Buildings.query_building(current.global_position + Vector2(0, Map.TILE_SIZE), world2d),
+		Buildings.query_building(current.global_position + Vector2(-Map.TILE_SIZE, 0), world_2d),
+		Buildings.query_building(current.global_position + Vector2(Map.TILE_SIZE, 0), world_2d),
+		Buildings.query_building(current.global_position + Vector2(0, -Map.TILE_SIZE), world_2d),
+		Buildings.query_building(current.global_position + Vector2(0, Map.TILE_SIZE), world_2d),
 	]
 	var actual_buildings: Array[Building] = []
 	var allow_only_pipes = true if (not current is Pipe) else false
 	
 	for building in neighbouring_buildings:
-		if building == null:
+		if current == null || building == null:
 			continue
 		if allow_only_pipes && not building is Pipe:
 			continue
@@ -113,18 +119,24 @@ func update_connections(start_tile_position: Vector2i, new_state: bool):
 
 
 func restart_animations():
-	# TODO: Add the building animation itself
+	if !disabled:
+		return
+	
 	disabled_overlay.stop()
 	disabled_overlay.play("default")
 
 
 func enable_building():
+	if !disabled:
+		return
 	disabled = false
 	disabled_overlay.stop()
 	disabled_overlay.visible = false
 
 
 func disable_building():
+	if disabled:
+		return
 	disabled = true
 	disabled_overlay.stop()
 	disabled_overlay.play("default")
