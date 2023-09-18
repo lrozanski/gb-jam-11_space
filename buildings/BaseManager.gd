@@ -23,6 +23,8 @@ func _tile_to_global(tile_position: Vector2i):
 	return map.to_global(map_local)
 
 
+# FIXME: Investigate this!
+# FIXME: This has a bug that occurs for some connections, but not others
 func _on_building_built(building_name: String, tile_position: Vector2i):
 	if !process:
 		process = true
@@ -40,23 +42,23 @@ func _on_building_built(building_name: String, tile_position: Vector2i):
 	var hq: Building = get_tree().get_first_node_in_group("hq") as Building
 	var updated: Array[Vector2i] = hq.update_connections(hq.get_tile_position(), true)
 	updated.insert(0, hq.get_tile_position())
-	var buildings = get_tree().get_nodes_in_group("buildings")
+	var all_buildings = get_tree().get_nodes_in_group("buildings")
 	
-	for item in buildings:
+	for item in all_buildings:
 		var building = item as Building
 		
 		if not building.get_tile_position() in updated:
-			building.disabled = true
+			building.disable_building()
 			disabled_buildings.append(building)
 		else:
-			building.disabled = false
+			building.enable_building()
 			enabled_buildings.append(building)
 	
 	print("Updated building state. Enabled: %d" % updated.size())
 	queue_redraw()
 
 
-func _process(delta):
+func _process(_delta):
 	if process:
 		_on_building_built(process_params.get("building_name"), process_params.get("tile_position"))
 		process = false

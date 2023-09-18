@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://o4w4y26br1nd"]
+
+[ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="1_ueb0s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qx18"]
+atlas = ExtResource("1_ueb0s")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37nkl"]
+atlas = ExtResource("1_ueb0s")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dsol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qx18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37nkl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="DisabledOverlay" type="AnimatedSprite2D"]
+visible = false
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_3dsol")
+centered = false

@@ -65,12 +65,12 @@ func build_building(building_name: String):
 	building_built.emit(building_name, _get_cursor_tile_position())
 
 
-func remove_building():
-	if !RemoveBuildingPanel.CHOICE:
+func remove_building(remove: bool):
+	if !remove:
 		return
 	
 	var cursor_position = cursor.global_position
-	var building = buildings.query_building(cursor_position, get_world_2d())
+	var building = Buildings.query_building(cursor_position, get_world_2d())
 	
 	if building != null:
 		building_removed.emit(building.get_meta("type"))

@@ -3,9 +3,7 @@ class_name RemoveBuildingPanel
 
 @onready var indicator: Label = $"Cancel/Indicator"
 
-static var CHOICE: bool = false
-
-signal removal_confirmed
+signal removal_confirmed(choice: bool)
 signal removal_canceled
 
 var choices: Array[Node] = []
@@ -17,16 +15,11 @@ func _ready():
 	choices = get_children()
 	max_index = choices.size()
 	_update_indicator()
-	_update_choice()
 
 
 func _update_indicator():
 	var choice = choices[index]
 	indicator.reparent(choice, false)
-
-
-func _update_choice():
-	CHOICE = true if index == 2 else false
 
 
 func _process(_delta):
@@ -47,10 +40,10 @@ func _process(_delta):
 	if index != current_index:
 		index = wrapi(index, 1, max_index)
 		_update_indicator()
-		_update_choice()
 
 	if Input.is_action_just_pressed("Confirm"):
-		removal_confirmed.emit()
+		var choice = index == 2
+		removal_confirmed.emit(choice)
 		index = 1
 		_update_indicator()
 	elif Input.is_action_just_pressed("Cancel"):

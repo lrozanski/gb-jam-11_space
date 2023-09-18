@@ -1,22 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://dunf7jjiy6pwf"]
+[gd_scene load_steps=5 format=3 uid="uid://coo1d8wcbl5yk"]
 
-[ext_resource type="Texture2D" uid="uid://3kdmawlblux7" path="res://ui/icons/air_filter.tres" id="1_h8lwp"]
-[ext_resource type="Script" path="res://buildings/AirFilter.gd" id="1_vksew"]
+[ext_resource type="Script" path="res://buildings/Farm.gd" id="1_g2wqu"]
+[ext_resource type="Texture2D" uid="uid://3kdmawlblux7" path="res://ui/icons/air_filter.tres" id="2_ewd8v"]
+[ext_resource type="PackedScene" uid="uid://o4w4y26br1nd" path="res://ui/disabled_overlay.tscn" id="3_2e6a8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v117l"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulwdm"]
 size = Vector2(64, 64)
 
 [node name="Air Filter" type="StaticBody2D" groups=["buildings"]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_vksew")
+script = ExtResource("1_g2wqu")
 metadata/type = "Air Filter"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("1_h8lwp")
-centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
-shape = SubResource("RectangleShape2D_v117l")
+shape = SubResource("RectangleShape2D_ulwdm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_ewd8v")
+centered = false
+
+[node name="DisabledOverlay" parent="." instance=ExtResource("3_2e6a8")]

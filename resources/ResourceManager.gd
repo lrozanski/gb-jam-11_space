@@ -29,7 +29,7 @@ func _ready():
 	_update_resource_ui()
 
 
-func _on_building_built(building: String, tile_position: Vector2i):
+func _on_building_built(building: String, _tile_position: Vector2i):
 	match building:
 		"H Pipe":
 			pass

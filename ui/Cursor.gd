@@ -3,6 +3,7 @@ class_name Cursor
 
 @onready var map: Map = $"%TileMap"
 @onready var buildings: Buildings = $"%Buildings"
+@onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 
 signal construct_building
 signal demolish_building
@@ -38,7 +39,7 @@ func _process(_delta):
 	
 	# Building
 	if Input.is_action_just_pressed("Confirm"):
-		var building = buildings.query_building(global_position, get_world_2d())
+		var building = Buildings.query_building(global_position, get_world_2d())
 		
 		if building != null:
 			demolish_building.emit()
@@ -46,3 +47,8 @@ func _process(_delta):
 		else:
 			construct_building.emit()
 			print("construct_building")
+
+
+func restart_animation():
+	sprite.stop()
+	sprite.play("default")

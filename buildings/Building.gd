@@ -15,6 +15,7 @@ signal deactivated
 @export var is_hq: bool = false
 
 @onready var map: Map = $"/root/Scene/%TileMap"
+@onready var disabled_overlay: AnimatedSprite2D = $"DisabledOverlay";
 
 
 func get_tile_position():
@@ -99,3 +100,21 @@ func update_connections(start_tile_position: Vector2i, new_state: bool):
 	
 	return closed_array
 
+
+func restart_animations():
+	# TODO: Add the building animation itself
+	disabled_overlay.stop()
+	disabled_overlay.play("default")
+
+
+func enable_building():
+	disabled = false
+	disabled_overlay.stop()
+	disabled_overlay.visible = false
+
+
+func disable_building():
+	disabled = true
+	disabled_overlay.stop()
+	disabled_overlay.play("default")
+	disabled_overlay.visible = true

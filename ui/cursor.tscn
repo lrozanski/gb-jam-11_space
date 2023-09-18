@@ -1,17 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://y6yrdj5lulua"]
+[gd_scene load_steps=6 format=3 uid="uid://y6yrdj5lulua"]
 
 [ext_resource type="Script" path="res://ui/Cursor.gd" id="1_tak03"]
 [ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="2_att0i"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yt3pf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vyv6"]
+atlas = ExtResource("2_att0i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rct4"]
 atlas = ExtResource("2_att0i")
 region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lt3bm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vyv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rct4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Cursor" type="Node2D"]
 script = ExtResource("1_tak03")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 scale = Vector2(4, 4)
-texture = SubResource("AtlasTexture_yt3pf")
+sprite_frames = SubResource("SpriteFrames_lt3bm")
+autoplay = "default"
+frame = 1
+frame_progress = 0.214587
 centered = false

@@ -37,7 +37,7 @@ func _on_remove_building_panel_open():
 	remove_building_panel.process_mode = Node.PROCESS_MODE_INHERIT
 
 
-func _on_remove_building_panel_close():
+func _on_remove_building_panel_close(_choice: bool):
 	BUILDING_PANEL_OPEN = false
 	REMOVE_BUILDING_PANEL_OPEN = false
 	CURSOR_MOVEABLE = true
