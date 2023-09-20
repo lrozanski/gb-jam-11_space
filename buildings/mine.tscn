@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bglo81fmga2lb"]
+
+[ext_resource type="Script" path="res://buildings/Mine.gd" id="1_me183"]
+[ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="2_jmt11"]
+[ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="3_gx2ne"]
+[ext_resource type="PackedScene" uid="uid://o4w4y26br1nd" path="res://ui/disabled_overlay.tscn" id="4_l124e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cds57"]
+size = Vector2(64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8ktk"]
+atlas = ExtResource("3_gx2ne")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjxj0"]
+atlas = ExtResource("3_gx2ne")
+region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_60hop"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8ktk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjxj0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Mine" type="StaticBody2D" groups=["buildings", "hq"]]
+position = Vector2(256, 256)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_me183")
+metadata/type = "Mine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_cds57")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+texture = ExtResource("2_jmt11")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_60hop")
+autoplay = "default"
+frame = 1
+frame_progress = 0.902073
+centered = false
+
+[node name="DisabledOverlay" parent="." instance=ExtResource("4_l124e")]

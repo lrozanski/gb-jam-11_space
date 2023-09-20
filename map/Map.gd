@@ -13,6 +13,7 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @export var farm_scene: PackedScene = preload("res://buildings/farm.tscn")
 @export var air_filter_scene: PackedScene = preload("res://buildings/air_filter.tscn")
 @export var landing_pad_scene: PackedScene = preload("res://buildings/landing_pad.tscn")
+@export var mine_scene: PackedScene = preload("res://buildings/mine.tscn")
 
 @onready var cursor: Cursor = $"%Cursor"
 @onready var buildings: Buildings = $"%Buildings"
@@ -59,6 +60,10 @@ func build_building(building_name: String):
 			buildings.add_child(instance)
 		"Landing Pad":
 			var instance = landing_pad_scene.instantiate() as Node2D
+			instance.global_position = cursor.global_position
+			buildings.add_child(instance)
+		"Mine":
+			var instance = mine_scene.instantiate() as Node2D
 			instance.global_position = cursor.global_position
 			buildings.add_child(instance)
 	

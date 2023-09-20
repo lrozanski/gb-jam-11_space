@@ -6,7 +6,7 @@
 visible = false
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = -2
-columns = 3
+columns = 4
 script = ExtResource("2_5uesh")
 
 [node name="H Pipe" type="Label" parent="."]
@@ -42,6 +42,14 @@ text = "Farm"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Air Filter" type="Label" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
+text = "Air Filter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="V Pipe" type="Label" parent="."]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -50,11 +58,11 @@ text = "V Pipe"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Air Filter" type="Label" parent="."]
+[node name="Mine" type="Label" parent="."]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
-text = "Air Filter"
+text = "Mine"
 horizontal_alignment = 1
 vertical_alignment = 1
 
