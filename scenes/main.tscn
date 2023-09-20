@@ -5,11 +5,11 @@
 [ext_resource type="TileSet" uid="uid://ebhjv1afqvxo" path="res://map/tile_set.tres" id="2_18a4n"]
 [ext_resource type="PackedScene" uid="uid://2rexuoupludk" path="res://resources/resource_manager.tscn" id="2_e6s0p"]
 [ext_resource type="Script" path="res://map/Map.gd" id="3_y7hv7"]
-[ext_resource type="PackedScene" uid="uid://uffjtjskvi4o" path="res://buildings/habitat.tscn" id="4_fwvdh"]
 [ext_resource type="Script" path="res://map/Buildings.gd" id="4_jiryw"]
 [ext_resource type="PackedScene" uid="uid://y6yrdj5lulua" path="res://ui/cursor.tscn" id="4_owu4c"]
 [ext_resource type="PackedScene" uid="uid://e1bc40hbyw57" path="res://ui/resource_bar.tscn" id="5_h757n"]
 [ext_resource type="PackedScene" uid="uid://dcgow4nu837wf" path="res://ui/status_bar.tscn" id="6_fdw0g"]
+[ext_resource type="PackedScene" uid="uid://cvdkabnjxjawj" path="res://buildings/hq.tscn" id="7_y0twi"]
 [ext_resource type="PackedScene" uid="uid://cibmnce83nix0" path="res://ui/ui_manager.tscn" id="10_0japa"]
 [ext_resource type="PackedScene" uid="uid://b1jc04cbov6rt" path="res://buildings/base_manager.tscn" id="12_m4xho"]
 [ext_resource type="Script" path="res://AnimationManager.gd" id="13_k6yfe"]
@@ -52,10 +52,7 @@ script = ExtResource("3_y7hv7")
 unique_name_in_owner = true
 script = ExtResource("4_jiryw")
 
-[node name="Habitat" parent="Buildings" groups=["hq"] instance=ExtResource("4_fwvdh")]
-position = Vector2(256, 256)
-disabled = false
-is_hq = true
+[node name="HQ" parent="Buildings" instance=ExtResource("7_y0twi")]
 
 [node name="Cursor" parent="." instance=ExtResource("4_owu4c")]
 unique_name_in_owner = true

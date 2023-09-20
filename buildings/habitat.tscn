@@ -1,25 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://uffjtjskvi4o"]
+[gd_scene load_steps=5 format=3 uid="uid://dwwbauajhk0sp"]
 
-[ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="1_exre7"]
-[ext_resource type="Script" path="res://buildings/Habitat.gd" id="1_kryie"]
-[ext_resource type="PackedScene" uid="uid://o4w4y26br1nd" path="res://ui/disabled_overlay.tscn" id="3_w58uq"]
+[ext_resource type="Script" path="res://buildings/Habitat.gd" id="1_db3k7"]
+[ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="2_jp2w7"]
+[ext_resource type="PackedScene" uid="uid://o4w4y26br1nd" path="res://ui/disabled_overlay.tscn" id="3_b5ax3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6kw2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cds57"]
 size = Vector2(64, 64)
 
 [node name="Habitat" type="StaticBody2D" groups=["buildings"]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_kryie")
+script = ExtResource("1_db3k7")
 metadata/type = "Habitat"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
-shape = SubResource("RectangleShape2D_l6kw2")
+shape = SubResource("RectangleShape2D_cds57")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-texture = ExtResource("1_exre7")
+texture = ExtResource("2_jp2w7")
 centered = false
 
-[node name="DisabledOverlay" parent="." instance=ExtResource("3_w58uq")]
+[node name="DisabledOverlay" parent="." instance=ExtResource("3_b5ax3")]
