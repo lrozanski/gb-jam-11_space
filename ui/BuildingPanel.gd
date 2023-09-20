@@ -1,10 +1,13 @@
 extends GridContainer
 class_name BuildingPanel
 
-@onready var indicator: Label = $"H Pipe/Indicator"
-
 signal construction_confirmed(building: String)
 signal construction_canceled
+
+@onready var indicator: Label = $"H Pipe/Indicator"
+
+@export var enabled_color: Color
+@export var disabled_color: Color
 
 var buildings: Array[Node] = []
 var building_index: int = 0
@@ -42,7 +45,7 @@ func _process(_delta):
 		building_index = wrapi(building_index, 0, max_index)
 		_update_building_name()
 
-	if Input.is_action_just_pressed("Confirm"):
+	if Input.is_action_just_pressed("Confirm") && !buildings[building_index].disabled:
 		construction_confirmed.emit(building_name)
 	elif Input.is_action_just_pressed("Cancel"):
 		construction_canceled.emit()

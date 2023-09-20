@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8033wiuyjm2d"]
+[gd_scene load_steps=3 format=3 uid="uid://c8033wiuyjm2d"]
 
 [ext_resource type="Script" path="res://ui/BuildingPanel.gd" id="2_5uesh"]
+[ext_resource type="PackedScene" uid="uid://dg6ap7hi07dph" path="res://ui/building_labels/building_label.tscn" id="2_bbpak"]
 
 [node name="BuildingPanel" type="GridContainer"]
 visible = false
@@ -9,67 +10,39 @@ theme_override_constants/v_separation = -2
 columns = 4
 script = ExtResource("2_5uesh")
 
-[node name="H Pipe" type="Label" parent="."]
-custom_minimum_size = Vector2(128, 0)
+[node name="H Pipe" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = "H Pipe"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Indicator" type="Label" parent="H Pipe"]
 layout_mode = 2
 offset_right = 128.0
-offset_bottom = 26.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = ">"
 
-[node name="Habitat" type="Label" parent="."]
-custom_minimum_size = Vector2(128, 0)
+[node name="Habitat" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = "Habitat"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Farm" type="Label" parent="."]
-custom_minimum_size = Vector2(128, 0)
+[node name="Farm" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = "Farm"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Air Filter" type="Label" parent="."]
-custom_minimum_size = Vector2(128, 0)
+[node name="Air Filter" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = "Air Filter"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="V Pipe" type="Label" parent="."]
-custom_minimum_size = Vector2(128, 0)
+[node name="V Pipe" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = "V Pipe"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Mine" type="Label" parent="."]
-custom_minimum_size = Vector2(128, 0)
+[node name="Mine" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = "Mine"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Landing Pad" type="Label" parent="."]
-custom_minimum_size = Vector2(128, 0)
+[node name="Landing Pad" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = "Landing Pad"
-horizontal_alignment = 1
-vertical_alignment = 1

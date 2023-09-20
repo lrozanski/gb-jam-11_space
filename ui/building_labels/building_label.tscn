@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg6ap7hi07dph"]
+
+[ext_resource type="Script" path="res://ui/building_labels/building_label.gd" id="1_e2qcs"]
+
+[node name="Building Label" type="Label"]
+custom_minimum_size = Vector2(144, 0)
+theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
+text = "Landing Pad: 50"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_e2qcs")
+enabled_color = Color(0.901961, 0.980392, 0.847059, 1)
+disabled_color = Color(0.188235, 0.407843, 0.313726, 1)

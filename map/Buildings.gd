@@ -1,6 +1,16 @@
 extends Node2D
 class_name Buildings
 
+const BUILDING_COST: Dictionary = {
+	"Pipe": 1,
+	"H Pipe": 1,
+	"V Pipe": 1,
+	"Habitat": 5,
+	"Farm": 5,
+	"Air Filter": 5,
+	"Mine": 2,
+	"Landing Pad": 50,
+}
 
 static func query_building(building_position: Vector2, world2d: World2D) -> Building:
 	var tile_center = building_position + Vector2(Map.TILE_SIZE / 2.0, Map.TILE_SIZE / 2.0)

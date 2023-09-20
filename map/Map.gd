@@ -19,6 +19,7 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @onready var buildings: Buildings = $"%Buildings"
 @onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
 @onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
+@onready var resource_manager: ResourceManager = $"%ResourceManager"
 
 func _ready():
 	building_panel.connect("construction_confirmed", build_building)
@@ -67,6 +68,8 @@ func build_building(building_name: String):
 			instance.global_position = cursor.global_position
 			buildings.add_child(instance)
 	
+	var iron_cost = buildings.BUILDING_COST[building_name]
+	resource_manager.update_iron(-iron_cost)
 	building_built.emit(building_name, _get_cursor_tile_position())
 
 
@@ -78,5 +81,7 @@ func remove_building(remove: bool):
 	var building = Buildings.query_building(cursor_position, get_world_2d())
 	
 	if building != null:
+		var iron_cost = buildings.BUILDING_COST[building.building_type]
+		resource_manager.update_iron(iron_cost)
 		building_removed.emit(building.building_type, building.disabled)
 		building.queue_free()

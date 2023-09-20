@@ -2,17 +2,18 @@ extends Node
 class_name ResourceManager
 
 signal population_changed
+signal iron_changed
 
-static var POPULATION
-static var MAX_POPULATION
-static var IRON
-static var FOOD
-static var OXYGEN
+static var POPULATION: int
+static var MAX_POPULATION: int
+static var IRON: int
+static var FOOD: int
+static var OXYGEN: int
 
-static var POPULATION_PER_TICK
-static var IRON_PER_TICK
-static var FOOD_PER_TICK
-static var OXYGEN_PER_TICK
+static var POPULATION_PER_TICK: int
+static var IRON_PER_TICK: int
+static var FOOD_PER_TICK: int
+static var OXYGEN_PER_TICK: int
 
 static var POPULATION_PER_SECOND = 0.2
 
@@ -31,6 +32,10 @@ var resource_change_buffer = {
 	"food": 0,
 	"oxygen": 0
 }
+
+
+func update_iron(amount: int):
+	resource_change_buffer["iron"] += amount
 
 
 func _ready():
@@ -59,7 +64,6 @@ func _on_building_built(building: String, _tile_position: Vector2i):
 		"V Pipe":
 			pass
 		"Habitat":
-			#increase_max_population()
 			pass
 		"Farm":
 			pass
@@ -68,7 +72,7 @@ func _on_building_built(building: String, _tile_position: Vector2i):
 		"Landing Pad":
 			pass
 		"Mine":
-			resource_change_buffer["iron"] += 5
+			pass
 
 
 func _on_building_removed(building: String, disabled: bool):
@@ -87,7 +91,6 @@ func on_building_state_changed(type: String, disabled: bool):
 			if disabled:
 				decrease_max_population()
 			else:
-				print("increasing max pop")
 				increase_max_population()
 		"Farm":
 			pass
@@ -96,11 +99,17 @@ func on_building_state_changed(type: String, disabled: bool):
 		"Landing Pad":
 			pass
 		"Mine":
-			resource_change_buffer["iron"] -= 5
+			if disabled:
+				IRON_PER_TICK -= 1
+			else:
+				IRON_PER_TICK += 1
+	
+	_update_resource_ui()
 
 
 func update_resources():
 	resource_change_buffer["population"] += POPULATION_PER_TICK
+	resource_change_buffer["iron"] += IRON_PER_TICK
 	resource_change_buffer["food"] += FOOD_PER_TICK
 	resource_change_buffer["oxygen"] += OXYGEN_PER_TICK
 
@@ -134,7 +143,9 @@ func _process(_delta):
 		FOOD += resource_change_buffer["food"]
 		OXYGEN += resource_change_buffer["oxygen"]
 		_update_resource_ui()
+
 		population_changed.emit()
+		iron_changed.emit()
 
 		resource_change_buffer = {
 			"population": 0,
