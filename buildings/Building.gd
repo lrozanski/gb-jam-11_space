@@ -122,7 +122,7 @@ func update_connections(start_tile_position: Vector2i, new_state: bool):
 func restart_animations():
 	if !disabled:
 		return
-	
+
 	disabled_overlay.stop()
 	disabled_overlay.play("default")
 

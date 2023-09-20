@@ -30,7 +30,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="HQ" type="StaticBody2D" groups=["buildings", "hq"]]
+[node name="HQ" type="StaticBody2D" groups=["animated", "buildings", "hq"]]
 position = Vector2(256, 256)
 collision_layer = 2
 collision_mask = 0
