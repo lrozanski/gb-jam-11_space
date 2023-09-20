@@ -78,5 +78,5 @@ func remove_building(remove: bool):
 	var building = Buildings.query_building(cursor_position, get_world_2d())
 	
 	if building != null:
-		building_removed.emit(building.get_meta("type"), building.disabled)
+		building_removed.emit(building.building_type, building.disabled)
 		building.queue_free()

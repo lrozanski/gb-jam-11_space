@@ -11,7 +11,7 @@ size = Vector2(64, 64)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_g2wqu")
-metadata/type = "Air Filter"
+building_type = "Air Filter"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)

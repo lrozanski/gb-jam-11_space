@@ -11,11 +11,12 @@ signal deactivated(type: String, disabled: bool)
 		disabled = value
 		
 		if disabled:
-			deactivated.emit(get_meta("type"), disabled)
+			deactivated.emit(building_type, disabled)
 		else:
-			activated.emit(get_meta("type"), disabled)
-
+			activated.emit(building_type, disabled)
+			
 @export var is_hq: bool = false
+@export var building_type: String = ""
 
 @onready var map: Map = $"/root/Scene/%TileMap"
 @onready var resource_manager: ResourceManager = $"/root/Scene/%ResourceManager"

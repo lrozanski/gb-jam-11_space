@@ -35,7 +35,7 @@ position = Vector2(256, 256)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_me183")
-metadata/type = "Mine"
+building_type = "Mine"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 32)
