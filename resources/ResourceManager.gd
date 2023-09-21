@@ -39,22 +39,32 @@ func update_iron(amount: int):
 
 
 func _ready():
-	POPULATION = 1
+	POPULATION = 0
 	MAX_POPULATION = 0
-	IRON = 10
+	IRON = 0
 	FOOD = 0
 	OXYGEN = 0
 	
-	POPULATION_PER_TICK = 1
+	POPULATION_PER_TICK = 0
 	IRON_PER_TICK = 0
 	FOOD_PER_TICK = 0
 	OXYGEN_PER_TICK = 0
 
 	map.connect("building_built", _on_building_built)
 	map.connect("building_removed", _on_building_removed)
+	map.connect("hq_placed", _on_hq_placed)
 
 	event_bus.register_action_per_tick(update_resources)
-	increase_max_population()
+	_update_resource_ui()
+
+
+func _on_hq_placed():
+	POPULATION = 1
+	MAX_POPULATION = 4
+	POPULATION_PER_TICK = 1
+	IRON = 10
+
+	_update_resource_ui()
 
 
 func _on_building_built(building: String, _tile_position: Vector2i):

@@ -3,12 +3,14 @@ class_name Map
 
 signal building_built(building: String, tile_position: Vector2i)
 signal building_removed(building: String, disabled: bool)
+signal hq_placed()
 
 static var SPRITE_SIZE: int = 16
 static var TILE_SCALE: int = 4
 static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 
 @export_category("Building Prefabs")
+@export var hq_scene: PackedScene = preload("res://buildings/hq.tscn")
 @export var pipe_scene: PackedScene = preload("res://buildings/pipe.tscn")
 @export var habitat_scene: PackedScene = preload("res://buildings/habitat.tscn")
 @export var farm_scene: PackedScene = preload("res://buildings/farm.tscn")
@@ -24,6 +26,7 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
 @onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
 @onready var resource_manager: ResourceManager = $"%ResourceManager"
+@onready var event_bus: EventBus = $"%EventBus"
 
 var BLANK_TILE_COORDS = Vector2i(7, 7)
 var VALUE_TO_TILE_ID = {
@@ -39,10 +42,10 @@ var patch_pattern = [
 	Vector2i(1, 4),
 ]
 
-
 func _ready():
 	building_panel.connect("construction_confirmed", build_building)
 	remove_building_panel.connect("removal_confirmed", remove_building)
+	connect("hq_placed", event_bus.start_game)
 
 	_generate_map()
 
@@ -56,6 +59,12 @@ func build_building(building_name: String):
 	print("Built a %s" % building_name)
 	
 	match building_name:
+		"HQ":
+			var instance = hq_scene.instantiate() as Habitat
+			buildings.add_child(instance)
+
+			instance.global_position = cursor.global_position
+			hq_placed.emit()
 		"H Pipe":
 			var instance = pipe_scene.instantiate() as Pipe
 			buildings.add_child(instance)

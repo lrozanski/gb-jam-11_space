@@ -6,5 +6,6 @@
 script = ExtResource("1_lseuo")
 
 [node name="GameLogicTick" type="Timer" parent="."]
+process_mode = 4
 wait_time = 5.0
 autostart = true

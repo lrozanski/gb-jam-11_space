@@ -2,6 +2,7 @@ extends Node2D
 class_name Buildings
 
 const BUILDING_COST: Dictionary = {
+	"HQ": 0,
 	"Pipe": 1,
 	"H Pipe": 1,
 	"V Pipe": 1,

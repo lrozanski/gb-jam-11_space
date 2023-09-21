@@ -45,20 +45,19 @@ func _process(_delta):
 
 	# Building
 	if Input.is_action_just_pressed("Confirm"):
+		var hq_placed = get_tree().get_nodes_in_group("hq").size() > 0
 		var building = Buildings.query_building(global_position, get_world_2d())
 		
 		if is_instance_valid(building) && building != null:
 			if building.is_hq:
 				return
 			demolish_building.emit()
-			print("demolish_building")
 		else:
 			var is_terraformed = map.get_cell_tile_data(0, get_tile_position()).get_custom_data("is_terraformed") as bool
-			if !is_terraformed:
+			if hq_placed && !is_terraformed:
 				return
 
 			construct_building.emit()
-			print("construct_building")
 
 
 func restart_animation():

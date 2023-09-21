@@ -28,6 +28,9 @@ func _on_building_built(_building_name: String = "", _tile_position: Vector2i = 
 		return
 	
 	process = false
+
+	if get_tree().get_nodes_in_group("hq").size() == 0:
+		return
 	
 	enabled_buildings.clear()
 	disabled_buildings.clear()
@@ -59,18 +62,3 @@ func _on_building_built(_building_name: String = "", _tile_position: Vector2i = 
 func _physics_process(_delta):
 	if process:
 		_on_building_built()
-
-
-func _draw():
-	pass
-	# var i = 0
-	# for building in enabled_buildings:
-	# 	var rect = Rect2(building.global_position, Vector2(Map.TILE_SIZE, Map.TILE_SIZE))
-	# 	draw_rect(rect, Color.WHITE, false, 4.0)
-	# 	draw_string(font, rect.get_center(), "%s" % i)
-	# 	i+=1
-		
-	# for building in disabled_buildings:
-	# 	var rect = Rect2(building.global_position, Vector2(Map.TILE_SIZE, Map.TILE_SIZE))
-	# 	draw_rect(rect, Color.BLACK, false, 4.0)
-	

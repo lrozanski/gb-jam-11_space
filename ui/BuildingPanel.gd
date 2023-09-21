@@ -4,7 +4,7 @@ class_name BuildingPanel
 signal construction_confirmed(building: String)
 signal construction_canceled
 
-@onready var indicator: Label = $"H Pipe/Indicator"
+@onready var indicator: Label = $"HQ/Indicator"
 
 @export var enabled_color: Color
 @export var disabled_color: Color
@@ -15,7 +15,7 @@ var max_index: int = -1
 var building_name: String = ""
 
 func _ready():
-	buildings = get_children()
+	buildings = get_children().filter(func(child): return child.visible)
 	max_index = buildings.size()
 	_update_building_name()
 
@@ -47,5 +47,18 @@ func _process(_delta):
 
 	if Input.is_action_just_pressed("Confirm") && !buildings[building_index].disabled:
 		construction_confirmed.emit(building_name)
+
+		if building_name == "HQ":
+			_switch_layout()
 	elif Input.is_action_just_pressed("Cancel"):
 		construction_canceled.emit()
+
+
+func _switch_layout():
+	for child: Label in get_children():
+		child.visible = child.name != "HQ"
+	
+	indicator.reparent(get_child(0))
+	buildings = get_children().filter(func(child): return child.visible)
+	building_index = 0
+	_update_building_name()

@@ -11,10 +11,45 @@ columns = 4
 script = ExtResource("2_5uesh")
 
 [node name="H Pipe" parent="." instance=ExtResource("2_bbpak")]
+visible = false
 layout_mode = 2
 text = "H Pipe"
 
-[node name="Indicator" type="Label" parent="H Pipe"]
+[node name="Habitat" parent="." instance=ExtResource("2_bbpak")]
+visible = false
+layout_mode = 2
+text = "Habitat"
+
+[node name="Farm" parent="." instance=ExtResource("2_bbpak")]
+visible = false
+layout_mode = 2
+text = "Farm"
+
+[node name="Air Filter" parent="." instance=ExtResource("2_bbpak")]
+visible = false
+layout_mode = 2
+text = "Air Filter"
+
+[node name="V Pipe" parent="." instance=ExtResource("2_bbpak")]
+visible = false
+layout_mode = 2
+text = "V Pipe"
+
+[node name="Mine" parent="." instance=ExtResource("2_bbpak")]
+visible = false
+layout_mode = 2
+text = "Mine"
+
+[node name="Landing Pad" parent="." instance=ExtResource("2_bbpak")]
+visible = false
+layout_mode = 2
+text = "Landing Pad"
+
+[node name="HQ" parent="." instance=ExtResource("2_bbpak")]
+layout_mode = 2
+text = "HQ"
+
+[node name="Indicator" type="Label" parent="HQ"]
 layout_mode = 2
 offset_right = 128.0
 offset_bottom = 23.0
@@ -22,27 +57,3 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
 text = ">"
-
-[node name="Habitat" parent="." instance=ExtResource("2_bbpak")]
-layout_mode = 2
-text = "Habitat"
-
-[node name="Farm" parent="." instance=ExtResource("2_bbpak")]
-layout_mode = 2
-text = "Farm"
-
-[node name="Air Filter" parent="." instance=ExtResource("2_bbpak")]
-layout_mode = 2
-text = "Air Filter"
-
-[node name="V Pipe" parent="." instance=ExtResource("2_bbpak")]
-layout_mode = 2
-text = "V Pipe"
-
-[node name="Mine" parent="." instance=ExtResource("2_bbpak")]
-layout_mode = 2
-text = "Mine"
-
-[node name="Landing Pad" parent="." instance=ExtResource("2_bbpak")]
-layout_mode = 2
-text = "Landing Pad"
