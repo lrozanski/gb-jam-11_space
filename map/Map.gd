@@ -8,6 +8,7 @@ static var SPRITE_SIZE: int = 16
 static var TILE_SCALE: int = 4
 static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 
+@export_category("Building Prefabs")
 @export var pipe_scene: PackedScene = preload("res://buildings/pipe.tscn")
 @export var habitat_scene: PackedScene = preload("res://buildings/habitat.tscn")
 @export var farm_scene: PackedScene = preload("res://buildings/farm.tscn")
@@ -15,15 +16,35 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @export var landing_pad_scene: PackedScene = preload("res://buildings/landing_pad.tscn")
 @export var mine_scene: PackedScene = preload("res://buildings/mine.tscn")
 
+@export_category("Map Generation")
+@export var noise: FastNoiseLite
+
 @onready var cursor: Cursor = $"%Cursor"
 @onready var buildings: Buildings = $"%Buildings"
 @onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
 @onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
 @onready var resource_manager: ResourceManager = $"%ResourceManager"
 
+var BLANK_TILE_COORDS = Vector2i(7, 7)
+var VALUE_TO_TILE_ID = {
+	[0.45, 0.55]: Vector2i(3, 1),
+	[0.65, 0.75]: Vector2i(4, 1),
+	[0.85, 0.95]: Vector2i(5, 1),
+}
+
+var patch_pattern = [
+	Vector2i(0, 3),
+	Vector2i(1, 3),
+	Vector2i(0, 4),
+	Vector2i(1, 4),
+]
+
+
 func _ready():
 	building_panel.connect("construction_confirmed", build_building)
 	remove_building_panel.connect("removal_confirmed", remove_building)
+
+	_generate_map()
 
 
 func _get_cursor_tile_position():
@@ -85,3 +106,36 @@ func remove_building(remove: bool):
 		resource_manager.update_iron(iron_cost)
 		building_removed.emit(building.building_type, building.disabled)
 		building.queue_free()
+
+
+func _generate_map():
+	noise.seed = randi()
+
+	for y in range(1, 8):
+		for x in range(10):
+			var cell_position = Vector2i(x, y)
+			var value = (noise.get_noise_2dv(cell_position * Map.TILE_SIZE) + 1) / 2.0
+			var tile_coords = BLANK_TILE_COORDS
+			var keys = VALUE_TO_TILE_ID.keys()
+
+			value = clampf(value, 0.0, 1.0)
+
+			for value_range in keys:
+				var min_value = value_range[0]
+				var max_value = value_range[1]
+
+				if value >= min_value && value <= max_value:
+					tile_coords = VALUE_TO_TILE_ID[value_range]
+					break
+
+			set_cell(0, cell_position, 0, tile_coords)
+	
+	for i in range(randi_range(1, 2)):
+		var tile_position = Vector2i(
+			randi_range(0, 9),
+			randi_range(1, 6),
+		)
+		set_cell(0, tile_position, 0, patch_pattern[0])
+		set_cell(0, tile_position + Vector2i(1, 0), 0, patch_pattern[1])
+		set_cell(0, tile_position + Vector2i(0, 1), 0, patch_pattern[2])
+		set_cell(0, tile_position + Vector2i(1, 1), 0, patch_pattern[3])

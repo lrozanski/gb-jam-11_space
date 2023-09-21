@@ -12,6 +12,12 @@ func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	pass
 
+
+func get_tile_position():
+	var map_local = map.to_local(global_position)
+	return map.local_to_map(map_local)
+
+
 func _process(_delta):
 	if !UI_Manager.CURSOR_MOVEABLE || UI_Manager.BUILDING_PANEL_OPEN:
 		return
@@ -36,7 +42,7 @@ func _process(_delta):
 			new_position.y >= Map.TILE_SIZE && new_position.y < bounds.y - Map.TILE_SIZE
 	):
 		global_position += direction * Map.TILE_SIZE
-	
+
 	# Building
 	if Input.is_action_just_pressed("Confirm"):
 		var building = Buildings.query_building(global_position, get_world_2d())
@@ -47,6 +53,10 @@ func _process(_delta):
 			demolish_building.emit()
 			print("demolish_building")
 		else:
+			var is_terraformed = map.get_cell_tile_data(0, get_tile_position()).get_custom_data("is_terraformed") as bool
+			if !is_terraformed:
+				return
+
 			construct_building.emit()
 			print("construct_building")
 

@@ -1,6 +1,9 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ebhjv1afqvxo"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://ebhjv1afqvxo"]
 
 [ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="1_60je0"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_byvif"]
+tile_data = PackedInt32Array(0, 0, 3, 65536, 0, 4, 1, 65536, 3, 65537, 65536, 4)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1aydd"]
 texture = ExtResource("1_60je0")
@@ -13,8 +16,11 @@ texture = ExtResource("1_60je0")
 6:0/0 = 0
 7:0/0 = 0
 0:1/0 = 0
+0:1/0/custom_data_0 = true
 1:1/0 = 0
+1:1/0/custom_data_0 = true
 2:1/0 = 0
+2:1/0/custom_data_0 = true
 3:1/0 = 0
 4:1/0 = 0
 5:1/0 = 0
@@ -61,13 +67,18 @@ texture = ExtResource("1_60je0")
 6:6/0 = 0
 7:6/0 = 0
 0:7/0 = 0
+0:7/0/custom_data_0 = true
 1:7/0 = 0
 2:7/0 = 0
 3:7/0 = 0
 4:7/0 = 0
 5:7/0 = 0
 6:7/0 = 0
+6:7/0/custom_data_0 = true
 7:7/0 = 0
 
 [resource]
+custom_data_layer_0/name = "is_terraformed"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_1aydd")
+pattern_0 = SubResource("TileMapPattern_byvif")
