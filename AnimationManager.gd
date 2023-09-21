@@ -37,4 +37,3 @@ func _update_global_animations():
 		sprite.play("default")
 
 	cursor.restart_animation()
-
