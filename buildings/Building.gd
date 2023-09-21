@@ -33,6 +33,7 @@ func _ready():
 	if is_hq:
 		disabled_overlay.stop()
 		disabled_overlay.visible = false
+		return
 
 
 func get_tile_position():

@@ -40,6 +40,11 @@ visible = false
 layout_mode = 2
 text = "Mine"
 
+[node name="Terraformer" parent="." instance=ExtResource("2_bbpak")]
+visible = false
+layout_mode = 2
+text = "Terraformer"
+
 [node name="Landing Pad" parent="." instance=ExtResource("2_bbpak")]
 visible = false
 layout_mode = 2

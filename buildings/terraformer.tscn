@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2uhanuuabtwc"]
+
+[ext_resource type="Script" path="res://buildings/Terraformer.gd" id="1_3wr52"]
+[ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="2_frrum"]
+[ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="3_g7iof"]
+[ext_resource type="PackedScene" uid="uid://o4w4y26br1nd" path="res://ui/disabled_overlay.tscn" id="4_h4t7r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cds57"]
+size = Vector2(64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2pxl"]
+atlas = ExtResource("3_g7iof")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3u26j"]
+atlas = ExtResource("3_g7iof")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fl21a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2pxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u26j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Terraformer" type="StaticBody2D" groups=["animated", "buildings"]]
+position = Vector2(256, 256)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_3wr52")
+building_type = "Terraformer"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_cds57")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(4, 4)
+texture = ExtResource("2_frrum")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_fl21a")
+centered = false
+
+[node name="DisabledOverlay" parent="." instance=ExtResource("4_h4t7r")]

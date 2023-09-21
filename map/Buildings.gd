@@ -10,6 +10,7 @@ const BUILDING_COST: Dictionary = {
 	"Farm": 5,
 	"Air Filter": 5,
 	"Mine": 2,
+	"Terraformer": 10,
 	"Landing Pad": 50,
 }
 

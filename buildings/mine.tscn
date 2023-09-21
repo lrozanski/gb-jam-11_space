@@ -30,7 +30,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Mine" type="StaticBody2D" groups=["animated", "buildings", "hq"]]
+[node name="Mine" type="StaticBody2D" groups=["animated", "buildings"]]
 position = Vector2(256, 256)
 collision_layer = 2
 collision_mask = 0
@@ -50,7 +50,6 @@ centered = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_60hop")
-autoplay = "default"
 frame = 1
 frame_progress = 0.902073
 centered = false

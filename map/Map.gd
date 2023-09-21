@@ -15,8 +15,9 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @export var habitat_scene: PackedScene = preload("res://buildings/habitat.tscn")
 @export var farm_scene: PackedScene = preload("res://buildings/farm.tscn")
 @export var air_filter_scene: PackedScene = preload("res://buildings/air_filter.tscn")
-@export var landing_pad_scene: PackedScene = preload("res://buildings/landing_pad.tscn")
 @export var mine_scene: PackedScene = preload("res://buildings/mine.tscn")
+@export var terraformer_scene: PackedScene = preload("res://buildings/terraformer.tscn")
+@export var landing_pad_scene: PackedScene = preload("res://buildings/landing_pad.tscn")
 
 @export_category("Map Generation")
 @export var noise: FastNoiseLite
@@ -103,12 +104,16 @@ func build_building(building_name: String):
 			var instance = air_filter_scene.instantiate() as Node2D
 			instance.global_position = cursor.global_position
 			buildings.add_child(instance)
-		"Landing Pad":
-			var instance = landing_pad_scene.instantiate() as Node2D
-			instance.global_position = cursor.global_position
-			buildings.add_child(instance)
 		"Mine":
 			var instance = mine_scene.instantiate() as Node2D
+			instance.global_position = cursor.global_position
+			buildings.add_child(instance)
+		"Terraformer":
+			var instance = terraformer_scene.instantiate() as Terraformer
+			instance.global_position = cursor.global_position
+			buildings.add_child(instance)
+		"Landing Pad":
+			var instance = landing_pad_scene.instantiate() as LandingPad
 			instance.global_position = cursor.global_position
 			buildings.add_child(instance)
 	
@@ -164,7 +169,7 @@ func _generate_map():
 		set_cell(0, tile_position + Vector2i(1, 1), 0, patch_pattern[3])
 
 
-func _terraform_tile(tile_position: Vector2i):
+func terraform_tile(tile_position: Vector2i):
 	var tile_source_id = get_cell_source_id(0, tile_position)
 	if tile_source_id == -1:
 		return
@@ -189,4 +194,4 @@ func _terraform_in_range(tile_position: Vector2i, tile_range: int):
 				continue
 				
 			var new_tile_position = tile_position + Vector2i(x, y)
-			_terraform_tile(new_tile_position)
+			terraform_tile(new_tile_position)

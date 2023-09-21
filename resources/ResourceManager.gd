@@ -60,9 +60,10 @@ func _ready():
 
 func _on_hq_placed():
 	POPULATION = 1
-	MAX_POPULATION = 4
+	MAX_POPULATION = 8
 	POPULATION_PER_TICK = 1
-	IRON = 10
+	IRON = 20
+	IRON_PER_TICK = 1
 
 	_update_resource_ui()
 	population_changed.emit()
