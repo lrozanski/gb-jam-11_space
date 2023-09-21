@@ -65,6 +65,8 @@ func _on_hq_placed():
 	IRON = 10
 
 	_update_resource_ui()
+	population_changed.emit()
+	iron_changed.emit()
 
 
 func _on_building_built(building: String, _tile_position: Vector2i):

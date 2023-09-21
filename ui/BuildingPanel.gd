@@ -60,5 +60,6 @@ func _switch_layout():
 	
 	indicator.reparent(get_child(0))
 	buildings = get_children().filter(func(child): return child.visible)
+	max_index = buildings.size()
 	building_index = 0
 	_update_building_name()
