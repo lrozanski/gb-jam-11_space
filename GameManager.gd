@@ -11,8 +11,13 @@ func _ready():
 
 
 func _check_lose_condition():
-	if ResourceManager.POPULATION > ResourceManager.MAX_POPULATION:
+	if (
+		ResourceManager.POPULATION > ResourceManager.MAX_POPULATION
+		|| ResourceManager.FOOD < 0
+		|| ResourceManager.OXYGEN < 0
+	):
 		get_tree().change_scene_to_file("res://scenes/lose_screen.tscn")
+
 
 
 func _is_tile_terraformed(tile_position: Vector2i):
