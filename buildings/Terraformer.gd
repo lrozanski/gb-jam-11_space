@@ -1,6 +1,8 @@
 extends "res://buildings/Building.gd"
 class_name Terraformer
 
+@export var radius: int = 2
+
 @onready var event_bus: EventBus = $"/root/Scene/%EventBus"
 
 
@@ -16,24 +18,22 @@ func _deactivated(_a, _b):
 	event_bus.deregister_action_per_tick(_terraform_random_tile)
 
 
-func _get_tiles_in_range():
+func _get_tiles_in_range():	
 	var tile_position = get_tile_position()
-	var cells = map.get_surrounding_cells(tile_position)
-	var all_cells = {}
+	var all_cells: Array[Vector2i] = []
 
-	for cell in cells:
-		if map.get_cell_source_id(0, cell) == -1:
-			continue
-		all_cells[cell] = map.get_cell_tile_data(0, cell).get_custom_data("is_terraformed") as bool
+	for y in range(-radius, radius + 1):
+		for x in range(-radius, radius + 1):
+			var cell = Vector2i(tile_position.x + x, tile_position.y + y)
 
-		for cell2 in map.get_surrounding_cells(cell):
-			if cell2 in all_cells:
+			if map.get_cell_source_id(0, cell) == -1:
 				continue
-			if map.get_cell_source_id(0, cell2) == -1:
+			if map.get_cell_tile_data(0, cell).get_custom_data("is_terraformed"):
 				continue
-			all_cells[cell2] = map.get_cell_tile_data(0, cell2).get_custom_data("is_terraformed") as bool
-
-	return all_cells.keys().filter(func(key): return !all_cells[key])
+			
+			all_cells.append(cell)
+	
+	return all_cells
 
 
 func _distance_to(a: Vector2i, b: Vector2i):

@@ -41,8 +41,13 @@ func deregister_action_per_tick(action: Callable):
 func logic_tick():
 	# Oneshot actions
 	for oneshot_action in registered_oneshot_actions:
-		oneshot_action.call()
+		if is_instance_valid(oneshot_action.get_object()):
+			oneshot_action.call()
 	
+	for i in range(registered_actions.size() - 1, -1, -1):
+		if !is_instance_valid(registered_actions[i].get_object()):
+			registered_actions.remove_at(i)
+
 	# Actions per logic tick
 	for action in registered_actions:
 		action.call()

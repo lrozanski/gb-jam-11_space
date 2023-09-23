@@ -3,6 +3,8 @@ class_name BuildingPanel
 
 signal construction_confirmed(building: String)
 signal construction_canceled
+signal cursor_moved
+signal cannot_build
 
 @onready var indicator: Label = $"HQ/Indicator"
 
@@ -44,12 +46,16 @@ func _process(_delta):
 	if building_index != current_building_index:
 		building_index = wrapi(building_index, 0, max_index)
 		_update_building_name()
+		cursor_moved.emit()
 
-	if Input.is_action_just_pressed("Confirm") && !buildings[building_index].disabled:
-		construction_confirmed.emit(building_name)
+	if Input.is_action_just_pressed("Confirm"):
+		if !buildings[building_index].disabled:
+			construction_confirmed.emit(building_name)
 
-		if building_name == "HQ":
-			_switch_layout()
+			if building_name == "HQ":
+				_switch_layout()
+		else:
+			cannot_build.emit()
 	elif Input.is_action_just_pressed("Cancel"):
 		construction_canceled.emit()
 

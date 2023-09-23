@@ -44,7 +44,7 @@ var patch_pattern = [
 ]
 
 var tile_coords_to_terraformed_tile_coords = {
-	Vector2i(7, 7): Vector2i(0, 7),
+	Vector2i(7, 7): Vector2i(7, 0),
 	Vector2i(0, 3): Vector2i(0, 5),
 	Vector2i(1, 3): Vector2i(1, 5),
 	Vector2i(0, 4): Vector2i(0, 6),
