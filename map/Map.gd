@@ -21,6 +21,7 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 
 @export_category("Map Generation")
 @export var noise: FastNoiseLite
+@export var ore_patches: int = 3
 
 @onready var cursor: Cursor = $"%Cursor"
 @onready var buildings: Buildings = $"%Buildings"
@@ -52,7 +53,11 @@ var tile_coords_to_terraformed_tile_coords = {
 	Vector2i(3, 1): Vector2i(0, 1),
 	Vector2i(4, 1): Vector2i(1, 1),
 	Vector2i(5, 1): Vector2i(2, 1),
+	Vector2i(7, 1): Vector2i(6, 1),
 }
+
+const PLAYABLE_WIDTH: int = 9
+const PLAYABLE_MAX_Y: int = 7
 
 
 func _ready():
@@ -115,8 +120,8 @@ func build_building(building_name: String):
 			instance.global_position = cursor.global_position
 			buildings.add_child(instance)
 	
-	var iron_cost = buildings.BUILDING_COST[building_name]
-	resource_manager.update_iron(-iron_cost)
+	var ore_cost = buildings.BUILDING_COST[building_name]
+	resource_manager.update_ore(-ore_cost)
 	building_built.emit(building_name, _get_cursor_tile_position())
 
 
@@ -128,8 +133,8 @@ func remove_building(remove: bool):
 	var building = Buildings.query_building(cursor_position, get_world_2d())
 	
 	if building != null:
-		var iron_cost = buildings.BUILDING_COST[building.building_type]
-		resource_manager.update_iron(iron_cost)
+		var ore_cost = buildings.BUILDING_COST[building.building_type]
+		resource_manager.update_ore(ore_cost)
 		building_removed.emit(building.building_type, building.disabled)
 		building.queue_free()
 
@@ -137,8 +142,8 @@ func remove_building(remove: bool):
 func _generate_map():
 	noise.seed = randi()
 
-	for y in range(1, 8):
-		for x in range(10):
+	for y in range(1, PLAYABLE_MAX_Y + 1):
+		for x in range(PLAYABLE_WIDTH + 1):
 			var cell_position = Vector2i(x, y)
 			var value = (noise.get_noise_2dv(cell_position * Map.TILE_SIZE) + 1) / 2.0
 			var tile_coords = BLANK_TILE_COORDS
@@ -165,6 +170,26 @@ func _generate_map():
 		set_cell(0, tile_position + Vector2i(1, 0), 0, patch_pattern[1])
 		set_cell(0, tile_position + Vector2i(0, 1), 0, patch_pattern[2])
 		set_cell(0, tile_position + Vector2i(1, 1), 0, patch_pattern[3])
+	
+	_generate_ore_patches()
+
+
+func _generate_ore_patches():
+	var i = 0
+	var placed_ore_patches = 0
+
+	while placed_ore_patches < ore_patches && i < 100:
+		i += 1
+
+		var cell_position = Vector2i(randi_range(0, PLAYABLE_WIDTH), randi_range(1, PLAYABLE_MAX_Y))
+
+		if get_cell_atlas_coords(0, cell_position) == Vector2i(7, 1):
+			continue
+
+		# (7, 1) Ore Patch
+		# (6, 1) Ore Patch (terraformed)
+		set_cell(0, cell_position, 0, Vector2i(7, 1))
+		placed_ore_patches += 1
 
 
 func terraform_tile(tile_position: Vector2i):

@@ -33,7 +33,7 @@ func _update_building_name():
 func _process(_delta):
 	if !visible:
 		return
-
+	
 	var current_building_index = building_index
 
 	if Input.is_action_just_pressed("Left"):
@@ -73,5 +73,5 @@ func _switch_layout():
 	_update_building_name()
 
 
-func toggle_mine_item(disabled: bool):
-	mine_label.disabled = disabled
+func toggle_mine_item(is_ore_patch: bool):
+	mine_label.invalid_placement = !is_ore_patch

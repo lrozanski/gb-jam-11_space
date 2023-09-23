@@ -17,7 +17,7 @@ func _on_building_panel_open(is_ore_patch: bool):
 	
 	building_panel.visible = true
 	building_panel.process_mode = Node.PROCESS_MODE_INHERIT
-	building_panel.toggle_mine_item(!is_ore_patch)
+	building_panel.toggle_mine_item(is_ore_patch)
 
 
 func _on_building_panel_close(_building_name: String = ""):

@@ -28,7 +28,7 @@ layout_mode = 2
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/Resources/MarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 32)
+custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 1.0
@@ -43,9 +43,9 @@ tint_progress = Color(0.52549, 0.752941, 0.423529, 1)
 layout_mode = 2
 label = "POP"
 
-[node name="Iron" parent="MarginContainer/Resources" instance=ExtResource("3_idjdk")]
+[node name="Ore" parent="MarginContainer/Resources" instance=ExtResource("3_idjdk")]
 layout_mode = 2
-label = "IRON"
+label = "ORE"
 
 [node name="Food" parent="MarginContainer/Resources" instance=ExtResource("3_idjdk")]
 layout_mode = 2
