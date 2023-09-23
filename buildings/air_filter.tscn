@@ -1,13 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://coo1d8wcbl5yk"]
+[gd_scene load_steps=9 format=3 uid="uid://coo1d8wcbl5yk"]
 
 [ext_resource type="Script" path="res://buildings/Farm.gd" id="1_g2wqu"]
 [ext_resource type="Texture2D" uid="uid://3kdmawlblux7" path="res://ui/icons/air_filter.tres" id="2_ewd8v"]
 [ext_resource type="PackedScene" uid="uid://o4w4y26br1nd" path="res://ui/disabled_overlay.tscn" id="3_2e6a8"]
+[ext_resource type="Texture2D" uid="uid://bpjt12e6kkfrc" path="res://map/tileset.png" id="4_80ods"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ulwdm"]
 size = Vector2(64, 64)
 
-[node name="Air Filter" type="StaticBody2D" groups=["buildings"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpq72"]
+atlas = ExtResource("4_80ods")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpe2g"]
+atlas = ExtResource("4_80ods")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2t8wx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpq72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpe2g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Air Filter" type="StaticBody2D" groups=["animated", "buildings"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_g2wqu")
@@ -18,8 +41,15 @@ position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_ulwdm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(4, 4)
 texture = ExtResource("2_ewd8v")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_2t8wx")
+autoplay = "default"
 centered = false
 
 [node name="DisabledOverlay" parent="." instance=ExtResource("3_2e6a8")]

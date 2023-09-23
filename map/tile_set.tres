@@ -84,5 +84,7 @@ texture = ExtResource("1_60je0")
 [resource]
 custom_data_layer_0/name = "is_terraformed"
 custom_data_layer_0/type = 1
+custom_data_layer_1/name = "is_ore_patch"
+custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_1aydd")
 pattern_0 = SubResource("TileMapPattern_byvif")

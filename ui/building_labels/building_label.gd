@@ -1,7 +1,13 @@
 extends Label
 class_name BuildingLabel
 
-@export var disabled: bool = false
+@export var disabled: bool = false:
+	set(value):
+		disabled = value
+		self_modulate = disabled_color if disabled else enabled_color
+	get:
+		return disabled
+
 @export var enabled_color: Color
 @export var disabled_color: Color
 
@@ -19,8 +25,3 @@ func _update_cost():
 	text = "%s: %s" % [self.name as String, cost]
 
 	disabled = resource_manager.IRON < cost
-
-	if disabled:
-		self_modulate = disabled_color
-	else:
-		self_modulate = enabled_color

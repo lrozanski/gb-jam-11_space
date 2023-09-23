@@ -7,6 +7,7 @@ signal cursor_moved
 signal cannot_build
 
 @onready var indicator: Label = $"HQ/Indicator"
+@onready var mine_label: BuildingLabel = $"Mine"
 
 @export var enabled_color: Color
 @export var disabled_color: Color
@@ -15,6 +16,7 @@ var buildings: Array[Node] = []
 var building_index: int = 0
 var max_index: int = -1
 var building_name: String = ""
+
 
 func _ready():
 	buildings = get_children().filter(func(child): return child.visible)
@@ -69,3 +71,7 @@ func _switch_layout():
 	max_index = buildings.size()
 	building_index = 0
 	_update_building_name()
+
+
+func toggle_mine_item(disabled: bool):
+	mine_label.disabled = disabled
