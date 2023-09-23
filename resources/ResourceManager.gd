@@ -20,7 +20,7 @@ static var OXYGEN_PER_TICK: int
 
 static var ORE_PER_MINE: int = 2
 static var FOOD_PER_FARM: int = 5
-static var OXYGEN_PER_AIR_FILTER: int = 3
+static var OXYGEN_PER_AIR_FILTER: int = 2
 
 static var POPULATION_PER_SECOND = 0.2
 
@@ -90,7 +90,7 @@ func _on_hq_placed():
 	FOOD_PER_TICK = 5
 	OXYGEN = 1
 	OXYGEN_PER_TICK = 5
-	MAX_OXYGEN = 30
+	MAX_OXYGEN = 15
 
 	_update_resource_ui()
 	population_changed.emit()
