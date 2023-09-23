@@ -4,6 +4,7 @@ class_name Map
 signal building_built(building: String, tile_position: Vector2i)
 signal building_removed(building: String, disabled: bool)
 signal hq_placed()
+signal tile_terraformed()
 
 static var SPRITE_SIZE: int = 16
 static var TILE_SCALE: int = 4
@@ -206,6 +207,7 @@ func terraform_tile(tile_position: Vector2i):
 	
 	var new_tile_coords = tile_coords_to_terraformed_tile_coords[atlas_coords]
 	set_cell(0, tile_position, 0, new_tile_coords)
+	tile_terraformed.emit()
 
 
 func _terraform_in_range(tile_position: Vector2i, tile_range: int):
