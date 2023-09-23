@@ -69,8 +69,6 @@ func _get_cursor_tile_position():
 
 
 func build_building(building_name: String):
-	print("Built a %s" % building_name)
-	
 	match building_name:
 		"HQ":
 			var instance = hq_scene.instantiate() as Habitat

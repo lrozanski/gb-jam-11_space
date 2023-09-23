@@ -54,8 +54,6 @@ func _on_building_built(_building_name: String = "", _tile_position: Vector2i = 
 			building.enable_building()
 			enabled_buildings.append(building)
 	
-	print("Updated building state. Enabled: %s" % updated.size())
-	print("Max population: %s" % ResourceManager.MAX_POPULATION)
 	queue_redraw()
 
 
