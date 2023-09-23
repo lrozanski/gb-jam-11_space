@@ -37,6 +37,7 @@ nine_patch_stretch = true
 texture_under = ExtResource("2_tsgia")
 texture_progress = ExtResource("2_tsgia")
 tint_under = Color(0.188235, 0.407843, 0.313726, 1)
+tint_over = Color(0.901961, 0.980392, 0.847059, 1)
 tint_progress = Color(0.52549, 0.752941, 0.423529, 1)
 
 [node name="Population" parent="MarginContainer/Resources" instance=ExtResource("3_idjdk")]
