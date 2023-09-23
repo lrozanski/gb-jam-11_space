@@ -9,7 +9,7 @@ custom_minimum_size = Vector2(640, 60)
 anchors_preset = 10
 anchor_right = 1.0
 offset_right = 640.0
-offset_bottom = 60.0
+offset_bottom = 64.0
 grow_horizontal = 2
 theme = ExtResource("1_v4usn")
 
@@ -21,7 +21,7 @@ theme_override_constants/margin_right = 16
 [node name="Resources" type="HBoxContainer" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 24
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Resources"]
 layout_mode = 2
