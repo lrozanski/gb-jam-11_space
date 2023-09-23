@@ -7,16 +7,20 @@ signal ore_changed
 static var POPULATION: int
 static var MAX_POPULATION: int
 static var ORE: int
-static var MAX_ORE: int = 20
+static var MAX_ORE: int
 static var FOOD: int
-static var MAX_FOOD: int = 5
+static var MAX_FOOD: int
 static var OXYGEN: int
-static var MAX_OXYGEN: int = 5
+static var MAX_OXYGEN: int
 
 static var POPULATION_PER_TICK: int
 static var ORE_PER_TICK: int
 static var FOOD_PER_TICK: int
 static var OXYGEN_PER_TICK: int
+
+static var ORE_PER_MINE: int = 2
+static var FOOD_PER_FARM: int = 5
+static var OXYGEN_PER_AIR_FILTER: int = 3
 
 static var POPULATION_PER_SECOND = 0.2
 
@@ -41,12 +45,25 @@ func update_ore(amount: int):
 	resource_change_buffer["ore"] += amount
 
 
+func update_food_per_tick(amount: int):
+	FOOD_PER_TICK += amount
+	_update_resource_ui()
+
+
+func update_oxygen_per_tick(amount: int):
+	OXYGEN_PER_TICK += amount
+	_update_resource_ui()
+
+
 func _ready():
 	POPULATION = 0
 	MAX_POPULATION = 0
 	ORE = 0
+	MAX_ORE = 0
 	FOOD = 0
+	MAX_FOOD = 0
 	OXYGEN = 0
+	MAX_OXYGEN = 0
 	
 	POPULATION_PER_TICK = 0
 	ORE_PER_TICK = 0
@@ -63,14 +80,17 @@ func _ready():
 
 func _on_hq_placed():
 	POPULATION = 1
-	MAX_POPULATION = 8
+	MAX_POPULATION = 10
 	POPULATION_PER_TICK = 1
 	ORE = 20
-	ORE_PER_TICK = 1
+	MAX_ORE = 20
+	ORE_PER_TICK = 2
 	FOOD = 1
-	FOOD_PER_TICK = 1
+	MAX_FOOD = 5
+	FOOD_PER_TICK = 5
 	OXYGEN = 1
-	OXYGEN_PER_TICK = 1
+	OXYGEN_PER_TICK = 5
+	MAX_OXYGEN = 30
 
 	_update_resource_ui()
 	population_changed.emit()
@@ -98,14 +118,16 @@ func _on_building_built(building: String, _tile_position: Vector2i):
 func _on_building_removed(building: String, disabled: bool):
 	if disabled:
 		return
+
 	on_building_state_changed(building, true)
 
 
 func on_building_state_changed(type: String, disabled: bool):
+	if !type in ["HQ", "Pipe", "Air Filter"]:
+		update_oxygen_per_tick(1 if disabled else -1)
+
 	match type:
-		"H Pipe":
-			pass
-		"V Pipe":
+		"Pipe":
 			pass
 		"Habitat":
 			if disabled:
@@ -113,16 +135,16 @@ func on_building_state_changed(type: String, disabled: bool):
 			else:
 				increase_max_population()
 		"Farm":
-			pass
+			update_food_per_tick(-FOOD_PER_FARM if disabled else FOOD_PER_FARM)
 		"Air Filter":
-			pass
+			update_oxygen_per_tick(-OXYGEN_PER_AIR_FILTER if disabled else OXYGEN_PER_AIR_FILTER)
 		"Landing Pad":
 			pass
 		"Mine":
 			if disabled:
-				ORE_PER_TICK -= 1
+				ORE_PER_TICK -= ORE_PER_MINE
 			else:
-				ORE_PER_TICK += 1
+				ORE_PER_TICK += ORE_PER_MINE
 	
 	_update_resource_ui()
 
@@ -133,13 +155,15 @@ func update_resources():
 	resource_change_buffer["food"] += FOOD_PER_TICK
 	resource_change_buffer["oxygen"] += OXYGEN_PER_TICK
 
+	update_food_per_tick(-POPULATION_PER_TICK)
+
 
 func increase_max_population():
-	resource_change_buffer["max_population"] += 4
+	resource_change_buffer["max_population"] += 5
 
 
 func decrease_max_population():
-	resource_change_buffer["max_population"] -= 4
+	resource_change_buffer["max_population"] -= 5
 
 
 func _update_resource_ui():

@@ -131,6 +131,7 @@ func restart_animations():
 func enable_building():
 	if !disabled:
 		return
+	
 	disabled = false
 	disabled_overlay.stop()
 	disabled_overlay.visible = false
@@ -139,6 +140,7 @@ func enable_building():
 func disable_building():
 	if disabled:
 		return
+	
 	disabled = true
 	disabled_overlay.stop()
 	disabled_overlay.play("default")

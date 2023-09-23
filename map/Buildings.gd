@@ -11,7 +11,7 @@ const BUILDING_COST: Dictionary = {
 	"Air Filter": 5,
 	"Mine": 2,
 	"Terraformer": 10,
-	"Landing Pad": 50,
+	"Landing Pad": 30,
 }
 
 static func query_building(building_position: Vector2, world2d: World2D) -> Building:
