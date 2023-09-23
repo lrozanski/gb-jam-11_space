@@ -4,16 +4,18 @@ class_name UI_Manager
 static var CURSOR_MOVEABLE = true
 static var BUILDING_PANEL_OPEN = false
 static var REMOVE_BUILDING_PANEL_OPEN = false
+static var MINE_BUILDABLE = false
 
 @onready var cursor: Cursor = $"%Cursor"
 @onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
 @onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
 
 
-func _on_building_panel_open():
+func _on_building_panel_open(is_ore_patch: bool):
 	BUILDING_PANEL_OPEN = true
 	REMOVE_BUILDING_PANEL_OPEN = false
 	CURSOR_MOVEABLE = false
+	MINE_BUILDABLE = is_ore_patch
 	
 	building_panel.visible = true
 	building_panel.process_mode = Node.PROCESS_MODE_INHERIT
@@ -23,6 +25,7 @@ func _on_building_panel_close(_building_name: String = ""):
 	BUILDING_PANEL_OPEN = false
 	REMOVE_BUILDING_PANEL_OPEN = false
 	CURSOR_MOVEABLE = true
+	MINE_BUILDABLE = false
 	
 	building_panel.visible = false
 	building_panel.process_mode = Node.PROCESS_MODE_DISABLED

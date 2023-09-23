@@ -5,7 +5,7 @@ class_name Cursor
 @onready var buildings: Buildings = $"%Buildings"
 @onready var sprite: AnimatedSprite2D = $"AnimatedSprite2D"
 
-signal construct_building
+signal construct_building(is_ore_patch: bool)
 signal demolish_building
 
 func _ready():
@@ -53,11 +53,14 @@ func _process(_delta):
 				return
 			demolish_building.emit()
 		else:
-			var is_terraformed = map.get_cell_tile_data(0, get_tile_position()).get_custom_data("is_terraformed") as bool
+			var tile_data = map.get_cell_tile_data(0, get_tile_position())
+			var is_terraformed = tile_data.get_custom_data("is_terraformed") as bool
+			var is_ore_patch = tile_data.get_custom_data("is_ore_patch") as bool
+
 			if hq_placed && !is_terraformed:
 				return
 
-			construct_building.emit()
+			construct_building.emit(is_ore_patch)
 
 
 func restart_animation():
