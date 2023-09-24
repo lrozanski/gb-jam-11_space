@@ -7,6 +7,8 @@ class_name Terraformer
 
 
 func _ready():
+	super._ready()
+
 	connect("activated", _activated)
 	connect("deactivated", _deactivated)
 
