@@ -10,7 +10,7 @@ var menu_items: Array[Node]
 var menu_index: int = 0
 var max_menu_index: int = -1
 
-const VOLUME_INCREMENT = 1
+const VOLUME_INCREMENT = 4
 
 
 func _ready():

@@ -18,7 +18,6 @@ static var TILE_SIZE: int = SPRITE_SIZE * TILE_SCALE
 @export var air_filter_scene: PackedScene = preload("res://buildings/air_filter.tscn")
 @export var mine_scene: PackedScene = preload("res://buildings/mine.tscn")
 @export var terraformer_scene: PackedScene = preload("res://buildings/terraformer.tscn")
-@export var landing_pad_scene: PackedScene = preload("res://buildings/landing_pad.tscn")
 
 @export_category("Map Generation")
 @export var noise: FastNoiseLite
@@ -114,10 +113,6 @@ func build_building(building_name: String):
 			buildings.add_child(instance)
 		"Terraformer":
 			var instance = terraformer_scene.instantiate() as Terraformer
-			instance.global_position = cursor.global_position
-			buildings.add_child(instance)
-		"Landing Pad":
-			var instance = landing_pad_scene.instantiate() as LandingPad
 			instance.global_position = cursor.global_position
 			buildings.add_child(instance)
 	

@@ -18,8 +18,8 @@ enum VolumeType {
 }
 
 var volume_ranges = {
-	VolumeType.SOUND: [-20.0, 0.0],
-	VolumeType.MUSIC: [-20.0, 0.0],
+	VolumeType.SOUND: [-80.0, 0.0],
+	VolumeType.MUSIC: [-80.0, 0.0],
 }
 var volume_offets = {
 	"menu": -5.0,

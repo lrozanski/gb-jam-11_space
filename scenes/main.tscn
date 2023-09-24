@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=16 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="PackedScene" uid="uid://eh41rjmcsbfa" path="res://ui/game_manager.tscn" id="1_3hkpm"]
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
@@ -14,10 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://b1jc04cbov6rt" path="res://buildings/base_manager.tscn" id="12_m4xho"]
 [ext_resource type="Script" path="res://AnimationManager.gd" id="13_k6yfe"]
 [ext_resource type="Script" path="res://sounds/AudioManager.gd" id="13_vn1ke"]
-[ext_resource type="AudioStream" uid="uid://cfi58a76e6w6k" path="res://sounds/Built.wav" id="14_agl05"]
-[ext_resource type="AudioStream" uid="uid://demtxu00fwqi4" path="res://sounds/Demolished.wav" id="15_n0mbv"]
-[ext_resource type="AudioStream" uid="uid://cwyg6s0kak872" path="res://sounds/Menu.wav" id="16_gsghu"]
-[ext_resource type="AudioStream" uid="uid://cvhegattqwxd3" path="res://sounds/Not_Allowed.wav" id="17_dgqgm"]
 [ext_resource type="PackedScene" uid="uid://b8sjssrhc3brr" path="res://ui/help_screen.tscn" id="18_f3ybl"]
 
 [node name="Scene" type="Node2D"]
@@ -73,19 +69,3 @@ script = ExtResource("13_k6yfe")
 
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("13_vn1ke")
-
-[node name="building_built" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("14_agl05")
-
-[node name="building_removed" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("15_n0mbv")
-
-[node name="menu" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("16_gsghu")
-volume_db = -5.0
-pitch_scale = 1.2
-
-[node name="invalid" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("17_dgqgm")
-volume_db = -5.0
-pitch_scale = 1.2

@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://6sbx0t006n6a"]
+[gd_scene load_steps=6 format=3 uid="uid://6sbx0t006n6a"]
 
 [ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_vd54p"]
 [ext_resource type="Texture2D" uid="uid://dee6lu37ml4v4" path="res://ui/sprites/title_screen.png" id="2_oq5j0"]
 [ext_resource type="Script" path="res://ui/title_screen.gd" id="3_edggq"]
-[ext_resource type="AudioStream" uid="uid://cwyg6s0kak872" path="res://sounds/Menu.wav" id="4_1awwf"]
-[ext_resource type="AudioStream" uid="uid://cvhegattqwxd3" path="res://sounds/Not_Allowed.wav" id="5_j6sev"]
 [ext_resource type="PackedScene" uid="uid://b8sjssrhc3brr" path="res://ui/help_screen.tscn" id="6_k06bt"]
+[ext_resource type="PackedScene" uid="uid://js34twclklkt" path="res://scenes/options_screen.tscn" id="7_huuyg"]
 
 [node name="TitleScreen" type="TextureRect"]
 process_mode = 3
@@ -14,18 +13,6 @@ offset_bottom = 576.0
 theme = ExtResource("1_vd54p")
 texture = ExtResource("2_oq5j0")
 script = ExtResource("3_edggq")
-
-[node name="Audio" type="Node" parent="."]
-
-[node name="Menu" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("4_1awwf")
-volume_db = -5.0
-pitch_scale = 1.2
-
-[node name="Denied" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("5_j6sev")
-volume_db = -5.0
-pitch_scale = 1.2
 
 [node name="GridContainer" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(384, 32)
@@ -105,4 +92,12 @@ vertical_alignment = 1
 [node name="HelpScreen" parent="." instance=ExtResource("6_k06bt")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 0
+
+[node name="OptionsScreen" parent="." instance=ExtResource("7_huuyg")]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+z_index = 10
+z_as_relative = false
 layout_mode = 0
