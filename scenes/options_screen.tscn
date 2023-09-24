@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://js34twclklkt"]
+
+[ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_8arwi"]
+[ext_resource type="Texture2D" uid="uid://c3f434nhl077o" path="res://ui/sprites/menu_edited.png" id="2_0snbn"]
+[ext_resource type="Script" path="res://scenes/options_screen.gd" id="3_nr218"]
+[ext_resource type="AudioStream" uid="uid://cwyg6s0kak872" path="res://sounds/Menu.wav" id="4_qj2qh"]
+[ext_resource type="AudioStream" uid="uid://cvhegattqwxd3" path="res://sounds/Not_Allowed.wav" id="5_r7erw"]
+[ext_resource type="PackedScene" uid="uid://b8sjssrhc3brr" path="res://ui/help_screen.tscn" id="6_3l18y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_whwcb"]
+
+[node name="OptionsScreen" type="TextureRect"]
+process_mode = 3
+offset_right = 640.0
+offset_bottom = 576.0
+theme = ExtResource("1_8arwi")
+texture = ExtResource("2_0snbn")
+script = ExtResource("3_nr218")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Menu" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_qj2qh")
+volume_db = -5.0
+pitch_scale = 1.2
+
+[node name="Denied" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_r7erw")
+volume_db = -5.0
+pitch_scale = 1.2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(384, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Sound" type="PanelContainer" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_whwcb")
+
+[node name="Indicator" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/Sound"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+theme_override_font_sizes/font_size = 48
+text = ">"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VBoxContainer/Sound"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/Sound/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+theme_override_font_sizes/font_size = 48
+text = "  Sound Volume:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Percent" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/Sound/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+theme_override_font_sizes/font_size = 48
+text = "80%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music" type="PanelContainer" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_whwcb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VBoxContainer/Music"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/Music/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+theme_override_font_sizes/font_size = 48
+text = "  Music Volume:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Percent" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/Music/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+theme_override_font_sizes/font_size = 48
+text = "80%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "
+W, S / Up, Down to navigate
+A, D / Left, Right to change values
+
+Press X to go back"
+horizontal_alignment = 1
+
+[node name="HelpScreen" parent="." instance=ExtResource("6_3l18y")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0

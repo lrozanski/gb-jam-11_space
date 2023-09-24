@@ -51,6 +51,8 @@ func update_food_per_tick(amount: int):
 
 
 func update_oxygen_per_tick(amount: int):
+	print("Changing oxygen by %s" % amount)
+
 	OXYGEN_PER_TICK += amount
 	_update_resource_ui()
 
@@ -70,7 +72,6 @@ func _ready():
 	FOOD_PER_TICK = 0
 	OXYGEN_PER_TICK = 0
 
-	map.connect("building_built", _on_building_built)
 	map.connect("building_removed", _on_building_removed)
 	map.connect("hq_placed", _on_hq_placed)
 
@@ -95,24 +96,6 @@ func _on_hq_placed():
 	_update_resource_ui()
 	population_changed.emit()
 	ore_changed.emit()
-
-
-func _on_building_built(building: String, _tile_position: Vector2i):
-	match building:
-		"H Pipe":
-			pass
-		"V Pipe":
-			pass
-		"Habitat":
-			pass
-		"Farm":
-			pass
-		"Air Filter":
-			pass
-		"Landing Pad":
-			pass
-		"Mine":
-			pass
 
 
 func _on_building_removed(building: String, disabled: bool):
