@@ -27,3 +27,11 @@ func _is_tile_terraformed(tile_position: Vector2i):
 func _check_victory_condition():
 	if map.get_used_cells(0).all(_is_tile_terraformed):
 		get_tree().change_scene_to_file("res://scenes/victory_screen.tscn")
+
+
+func pause():
+	get_tree().paused = true
+
+
+func unpause():
+	get_tree().paused = false

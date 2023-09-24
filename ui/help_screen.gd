@@ -12,8 +12,18 @@ var pages: Array[Node]
 
 
 func _ready():
+	connect("visibility_changed", _reset)
+
 	pages = get_node("VBoxContainer/Content").get_children()
 	max_page_index = pages.size() - 1
+	_update_arrows()
+
+
+func _reset():
+	pages[page].visible = false
+	pages[0].visible = true
+
+	page = 0
 	_update_arrows()
 
 

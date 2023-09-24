@@ -8,6 +8,8 @@ static var REMOVE_BUILDING_PANEL_OPEN = false
 @onready var cursor: Cursor = $"%Cursor"
 @onready var building_panel: BuildingPanel = $"%StatusBar/%BuildingPanel"
 @onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
+@onready var game_manager: GameManager = $"%GameManager"
+@onready var help_screen: HelpScreen = $"%HelpScreen"
 
 
 func _on_building_panel_open(is_ore_patch: bool):
@@ -61,3 +63,12 @@ func _ready():
 	
 	remove_building_panel.connect("removal_confirmed", _on_remove_building_panel_close, CONNECT_DEFERRED)
 	remove_building_panel.connect("removal_canceled", _on_remove_building_panel_close, CONNECT_DEFERRED)
+
+
+func _process(_delta):
+	if !help_screen.visible && Input.is_action_just_pressed("Select"):
+		help_screen.visible = true
+		game_manager.pause()
+	elif help_screen.visible && Input.is_action_just_pressed("Cancel"):
+		help_screen.visible = false
+		game_manager.unpause()

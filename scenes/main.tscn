@@ -21,6 +21,10 @@
 
 [node name="Scene" type="Node2D"]
 
+[node name="HelpScreen" parent="." instance=ExtResource("18_f3ybl")]
+unique_name_in_owner = true
+visible = false
+
 [node name="GameManager" parent="." instance=ExtResource("1_3hkpm")]
 unique_name_in_owner = true
 
@@ -55,6 +59,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="UI_Manager" parent="." instance=ExtResource("10_0japa")]
+process_mode = 3
 
 [node name="BaseManager" parent="." instance=ExtResource("12_m4xho")]
 
@@ -79,6 +84,3 @@ pitch_scale = 1.2
 stream = ExtResource("17_dgqgm")
 volume_db = -5.0
 pitch_scale = 1.2
-
-[node name="HelpScreen" parent="." instance=ExtResource("18_f3ybl")]
-visible = false
