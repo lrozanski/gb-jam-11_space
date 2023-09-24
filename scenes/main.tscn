@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=20 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="PackedScene" uid="uid://eh41rjmcsbfa" path="res://ui/game_manager.tscn" id="1_3hkpm"]
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
 [ext_resource type="PackedScene" uid="uid://2rexuoupludk" path="res://resources/resource_manager.tscn" id="2_e6s0p"]
+[ext_resource type="PackedScene" uid="uid://q0crv3xlu2gd" path="res://ui/pause_screen.tscn" id="2_pwtfb"]
 [ext_resource type="PackedScene" uid="uid://cvtyg3tuqd4xq" path="res://map/tile_map.tscn" id="4_2kpsq"]
 [ext_resource type="Script" path="res://map/Buildings.gd" id="4_jiryw"]
 [ext_resource type="PackedScene" uid="uid://y6yrdj5lulua" path="res://ui/cursor.tscn" id="4_owu4c"]
@@ -22,6 +23,10 @@
 [node name="Scene" type="Node2D"]
 
 [node name="HelpScreen" parent="." instance=ExtResource("18_f3ybl")]
+unique_name_in_owner = true
+visible = false
+
+[node name="PauseScreen" parent="." instance=ExtResource("2_pwtfb")]
 unique_name_in_owner = true
 visible = false
 

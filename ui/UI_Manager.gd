@@ -10,6 +10,7 @@ static var REMOVE_BUILDING_PANEL_OPEN = false
 @onready var remove_building_panel: RemoveBuildingPanel = $"%StatusBar/%RemoveBuildingPanel"
 @onready var game_manager: GameManager = $"%GameManager"
 @onready var help_screen: HelpScreen = $"%HelpScreen"
+@onready var pause_screen: Control = $"%PauseScreen"
 
 
 func _on_building_panel_open(is_ore_patch: bool):
@@ -71,4 +72,10 @@ func _process(_delta):
 		game_manager.pause()
 	elif help_screen.visible && Input.is_action_just_pressed("Cancel"):
 		help_screen.visible = false
+		game_manager.unpause()
+	if !help_screen.visible && Input.is_action_just_pressed("Start"):
+		pause_screen.visible = true
+		game_manager.pause()
+	elif pause_screen.visible && Input.is_action_just_pressed("Cancel"):
+		pause_screen.visible = false
 		game_manager.unpause()

@@ -12,9 +12,17 @@ config_version=5
 
 config/name="[GB Jam 11 - Space] Forming Terra"
 config/tags=PackedStringArray("game_jam")
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+driver/driver="RtAudio-DirectSound"
+
+[autoload]
+
+Jukebox="*res://Jukebox.gd"
 
 [display]
 

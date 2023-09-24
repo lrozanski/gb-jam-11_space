@@ -46,11 +46,10 @@ func _process(_delta):
 
 	if Input.is_action_just_pressed("Confirm"):
 		var text = menu_items[menu_index].name
-		print(text)
 		
 		match text:
 			"NewGame":
-				pass
+				get_tree().change_scene_to_file("res://scenes/main.tscn")
 			"HowToPlay":
 				help_screen.visible = true
 				_reset()

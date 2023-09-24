@@ -35,6 +35,6 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.901961, 0.980392, 0.847059, 1)
-text = "press START to restart"
+text = "press C to restart"
 horizontal_alignment = 1
 vertical_alignment = 1

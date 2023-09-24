@@ -51,6 +51,9 @@ func _next_page():
 
 
 func _process(_delta):
+	if !visible:
+		return
+
 	if Input.is_action_just_pressed("Up"):
 		if page > 0:
 			_previous_page()
