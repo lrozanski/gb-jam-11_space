@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 [audio]
 
-driver/driver="RtAudio-DirectSound"
+driver/output_latency=30
 
 [autoload]
 
