@@ -305,7 +305,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
-text = "Air Filters increase oxygen by 2 per week."
+text = "Air Filters increase oxygen by 2 per week.
+Buildings (except pipes) use 1 oxygen per week."
 vertical_alignment = 1
 autowrap_mode = 3
 
