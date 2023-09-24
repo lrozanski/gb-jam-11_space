@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://shqk8wkaq2x"]
+[gd_scene load_steps=19 format=3 uid="uid://shqk8wkaq2x"]
 
 [ext_resource type="PackedScene" uid="uid://eh41rjmcsbfa" path="res://ui/game_manager.tscn" id="1_3hkpm"]
 [ext_resource type="PackedScene" uid="uid://cusbrs1gy1xkl" path="res://events/event_bus.tscn" id="1_mr1qb"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://demtxu00fwqi4" path="res://sounds/Demolished.wav" id="15_n0mbv"]
 [ext_resource type="AudioStream" uid="uid://cwyg6s0kak872" path="res://sounds/Menu.wav" id="16_gsghu"]
 [ext_resource type="AudioStream" uid="uid://cvhegattqwxd3" path="res://sounds/Not_Allowed.wav" id="17_dgqgm"]
+[ext_resource type="PackedScene" uid="uid://b8sjssrhc3brr" path="res://ui/help_screen.tscn" id="18_f3ybl"]
 
 [node name="Scene" type="Node2D"]
 
@@ -78,3 +79,6 @@ pitch_scale = 1.2
 stream = ExtResource("17_dgqgm")
 volume_db = -5.0
 pitch_scale = 1.2
+
+[node name="HelpScreen" parent="." instance=ExtResource("18_f3ybl")]
+visible = false

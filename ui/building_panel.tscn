@@ -45,11 +45,6 @@ visible = false
 layout_mode = 2
 text = "Terraformer"
 
-[node name="Landing Pad" parent="." instance=ExtResource("2_bbpak")]
-visible = false
-layout_mode = 2
-text = "Landing Pad"
-
 [node name="HQ" parent="." instance=ExtResource("2_bbpak")]
 layout_mode = 2
 text = "HQ"

@@ -1,0 +1,359 @@
+[gd_scene load_steps=17 format=3 uid="uid://b8sjssrhc3brr"]
+
+[ext_resource type="Theme" uid="uid://lrjbiv84hnp2" path="res://ui/theme.tres" id="1_5v1nf"]
+[ext_resource type="Texture2D" uid="uid://c3f434nhl077o" path="res://ui/sprites/menu_edited.png" id="1_cf8cs"]
+[ext_resource type="Texture2D" uid="uid://bqq470vtlh7kq" path="res://ui/sprites/arrow.png" id="2_gv4uq"]
+[ext_resource type="Texture2D" uid="uid://cpxq1gxgkbrxq" path="res://ui/icons/hq.tres" id="3_ijbj7"]
+[ext_resource type="Script" path="res://ui/help_screen.gd" id="3_x8m3c"]
+[ext_resource type="Texture2D" uid="uid://cmkaf2t7wscnq" path="res://ui/icons/tiles.tres" id="4_e667v"]
+[ext_resource type="AudioStream" uid="uid://cwyg6s0kak872" path="res://sounds/Menu.wav" id="4_xdyo4"]
+[ext_resource type="AudioStream" uid="uid://cvhegattqwxd3" path="res://sounds/Not_Allowed.wav" id="5_740rp"]
+[ext_resource type="Texture2D" uid="uid://dfv8fneibnhkw" path="res://ui/icons/tiles_terraformed.tres" id="5_x8lmb"]
+[ext_resource type="Texture2D" uid="uid://b0dibpfd0ko5u" path="res://ui/icons/ore_patch.tres" id="6_1m1tn"]
+[ext_resource type="Texture2D" uid="uid://ddwlvyau7aeo5" path="res://ui/icons/terraformer.tres" id="8_2jg5v"]
+[ext_resource type="Texture2D" uid="uid://bsx2wm8kqfrt7" path="res://ui/icons/pipes.tres" id="9_gn6dv"]
+[ext_resource type="Texture2D" uid="uid://dqij6elhsyfru" path="res://ui/icons/disabled.tres" id="10_8b2e6"]
+[ext_resource type="Texture2D" uid="uid://cty2ke0cb73qh" path="res://ui/icons/farm_field.tres" id="12_el6kr"]
+[ext_resource type="Texture2D" uid="uid://dlk4fnp2mrauv" path="res://ui/icons/habitat.tres" id="12_vogtw"]
+[ext_resource type="Texture2D" uid="uid://3kdmawlblux7" path="res://ui/icons/air_filter.tres" id="13_wfkya"]
+
+[node name="HelpScreen" type="TextureRect"]
+z_index = 1
+offset_right = 640.0
+offset_bottom = 576.0
+theme = ExtResource("1_5v1nf")
+texture = ExtResource("1_cf8cs")
+script = ExtResource("3_x8m3c")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Menu" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("4_xdyo4")
+volume_db = -5.0
+pitch_scale = 1.2
+
+[node name="Denied" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_740rp")
+volume_db = -5.0
+pitch_scale = 1.2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 484.0
+offset_right = 640.0
+offset_bottom = 548.0
+theme_override_font_sizes/font_size = 48
+text = "Press X to exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 576.0
+offset_bottom = 480.0
+
+[node name="Top" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+alignment = 1
+
+[node name="UpArrow" type="TextureRect" parent="VBoxContainer/Top"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_gv4uq")
+stretch_mode = 5
+
+[node name="Content" type="GridContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="1" type="GridContainer" parent="VBoxContainer/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="HQ" type="TextureRect" parent="VBoxContainer/Content/1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_ijbj7")
+stretch_mode = 5
+
+[node name="HQLabel" type="Label" parent="VBoxContainer/Content/1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Start the game by placing your HQ anywhere on the map."
+autowrap_mode = 3
+
+[node name="Tiles" type="TextureRect" parent="VBoxContainer/Content/1"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+texture = ExtResource("4_e667v")
+stretch_mode = 5
+
+[node name="TilesLabel" type="Label" parent="VBoxContainer/Content/1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "These tiles are purely visual. They are not terraformed, and you can't build on them.
+"
+autowrap_mode = 3
+
+[node name="Tiles2" type="TextureRect" parent="VBoxContainer/Content/1"]
+custom_minimum_size = Vector2(192, 64)
+layout_mode = 2
+texture = ExtResource("5_x8lmb")
+stretch_mode = 5
+
+[node name="Tiles2Label" type="Label" parent="VBoxContainer/Content/1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "These tiles are terraformed and you can build on them."
+autowrap_mode = 3
+
+[node name="Ore Patch" type="TextureRect" parent="VBoxContainer/Content/1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("6_1m1tn")
+stretch_mode = 5
+
+[node name="OreLabel" type="Label" parent="VBoxContainer/Content/1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Place ore mines on ore patches.
+This will give you +2 ORE per week."
+autowrap_mode = 3
+
+[node name="2" type="VBoxContainer" parent="VBoxContainer/Content"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/Content/2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Pipes" type="TextureRect" parent="VBoxContainer/Content/2/GridContainer"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("9_gn6dv")
+stretch_mode = 5
+
+[node name="ConnectBuildings" type="Label" parent="VBoxContainer/Content/2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Connect buildings with pipes.
+H / V pipes do not connect to each other."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HQ" type="TextureRect" parent="VBoxContainer/Content/2/GridContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_ijbj7")
+stretch_mode = 5
+
+[node name="Terraformer" type="TextureRect" parent="VBoxContainer/Content/2/GridContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_2jg5v")
+stretch_mode = 5
+
+[node name="DisabledOverlay" type="TextureRect" parent="VBoxContainer/Content/2/GridContainer/HBoxContainer/Terraformer"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("10_8b2e6")
+stretch_mode = 5
+
+[node name="Unconnected" type="Label" parent="VBoxContainer/Content/2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Unconnected buildings are disabled.
+They do not contribute to your resources
+(or subtract from them)."
+autowrap_mode = 3
+
+[node name="Terraformer" type="TextureRect" parent="VBoxContainer/Content/2/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_2jg5v")
+stretch_mode = 5
+
+[node name="Terraformers" type="Label" parent="VBoxContainer/Content/2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Terraformers slowly process tiles around 
+them in a 2-tile radius. 1 tile per week. 
+Remove them when they're no longer useful!"
+autowrap_mode = 3
+
+[node name="Remove" type="Label" parent="VBoxContainer/Content/2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Removing a building refunds 100% of its resources.
+Use this to your advantage!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="3" type="VBoxContainer" parent="VBoxContainer/Content"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/Content/3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Population" type="Control" parent="VBoxContainer/Content/3/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PopulationLabel" type="Label" parent="VBoxContainer/Content/3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Population always increases by 1 per week. 
+This does not change."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Habitat" type="TextureRect" parent="VBoxContainer/Content/3/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("12_vogtw")
+
+[node name="HabitatLabel" type="Label" parent="VBoxContainer/Content/3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Habitats increase max population by 5."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Farm" type="TextureRect" parent="VBoxContainer/Content/3/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("12_el6kr")
+stretch_mode = 5
+
+[node name="FarmLabel" type="Label" parent="VBoxContainer/Content/3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Farms increase food by 5 per week."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AirFilter" type="TextureRect" parent="VBoxContainer/Content/3/GridContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("13_wfkya")
+stretch_mode = 5
+
+[node name="AirFilterLabel" type="Label" parent="VBoxContainer/Content/3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "Air Filters increase oxygen by 3 per week."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="4" type="VBoxContainer" parent="VBoxContainer/Content"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/Content/4"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Remove2" type="Label" parent="VBoxContainer/Content/4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "The game operates on a timer. 1 week takes 10 seconds.
+
+The goal of the game is to terraform all tiles.
+You lose when you have no food, no oxygen, or no more space for people."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Controls" type="Label" parent="VBoxContainer/Content/4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+text = "
+WASD / Arrow Keys - Movement
+Z - Confirm, X - Cancel
+C - START, V - SELECT / HELP
+
+Press V at any time to show this screen!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Bottom" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+alignment = 1
+
+[node name="DownArrow" type="TextureRect" parent="VBoxContainer/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_gv4uq")
+stretch_mode = 5
+flip_v = true
